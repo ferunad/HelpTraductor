@@ -46,9 +46,9 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         TextoCorreo=findViewById(R.id.correo);
         TextoContrasena=findViewById(R.id.contrasena);
-        boton=findViewById(R.id.botonEntrar);
+        boton=findViewById(R.id.botonCrear);
         botonMicrosoft =findViewById(R.id.botonFacebook);
-        boton=findViewById(R.id.botonEntrar);
+        boton=findViewById(R.id.botonCrear);
         botonRegistrar=findViewById(R.id.botonRegistrarse);
 
         //Acceder con google

@@ -12,7 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListaDiccionarios" android:theme="@style/sinBarra" ></activity>
+        <activity android:name=".OpcionesContactos" android:theme="@style/sinBarra"></activity>
+        <activity
+            android:name=".CrearContacto"
+            android:theme="@style/sinBarra" />
+        <activity
+            android:name=".ListaContactos"
+            android:theme="@style/sinBarra" />
+        <activity
+            android:name=".ListaDiccionarios"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".ListaApliacaciones"
             android:theme="@style/sinBarra" />

@@ -12,7 +12,7 @@ import android.widget.ImageView;
 public class MenuPrincipal extends AppCompatActivity {
 
     //variables
-    private ImageView botonVideos,botonApps,botonDicionarios;
+    private ImageView botonVideos,botonApps,botonDicionarios,botonContactos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,16 @@ public class MenuPrincipal extends AppCompatActivity {
         botonVideos= findViewById(R.id.botonVideos);
         botonApps= findViewById(R.id.botonApps);
         botonDicionarios=findViewById(R.id.botonDiccionarios);
+        botonContactos=findViewById(R.id.botonContactos);
+
+        //Listener para el boton que lleva a contactos
+        botonContactos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent diciconario=new Intent(MenuPrincipal.this,ListaContactos.class);
+                startActivity(diciconario);
+            }
+        });
 
         //Listener para el boton que lleva a diccionarios
         botonDicionarios.setOnClickListener(new View.OnClickListener() {

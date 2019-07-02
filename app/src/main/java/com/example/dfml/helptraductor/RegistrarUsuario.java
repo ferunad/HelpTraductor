@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegistrarUsuario extends AppCompatActivity {
@@ -39,7 +38,7 @@ public class RegistrarUsuario extends AppCompatActivity {
         TextoContrasena=findViewById(R.id.contrasena);
         TextoCelular=findViewById(R.id.celular);
         TextoNombre=findViewById(R.id.nombre);
-        boton=findViewById(R.id.botonEntrar);
+        boton=findViewById(R.id.botonCrear);
 
         //Conexión con la base de datos
         baseDatos=FirebaseDatabase.getInstance();
