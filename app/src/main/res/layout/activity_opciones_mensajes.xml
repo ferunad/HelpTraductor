@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OpcionesMensajes"
+    android:background="@drawable/fondo_pantallas_2">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/botonVolver"
+                android:layout_width="92dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:srcCompat="@drawable/ic_recurso_16" />
+
+            <TextView
+                android:id="@+id/titulo"
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="59dp"
+                android:fontFamily="@font/quicksandbold"
+                android:text="Mensaje"
+                android:textAlignment="center"
+                android:textColor="@color/AzulApp"
+                android:textSize="38dp" />
+
+            <TextView
+                android:id="@+id/textoEntrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="0dp"
+                android:text="Datos del mensaje:"
+                android:textAlignment="center"
+                android:fontFamily="@font/khularegular"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
+
+            <include
+                android:id="@+id/ingresarnombre"
+                layout="@layout/campo_texto_titulo_mensaje"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="0dp"></include>
+
+            <include
+                android:id="@+id/ingresarnombre"
+                layout="@layout/campo_texto_mensaje"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="0dp"></include>
+
+            <LinearLayout
+                android:id="@+id/menuLinearLayoutopcines"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/midTableLayout"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/eliminar"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_boton_eliminar" />
+
+                <ImageView
+                    android:id="@+id/editar"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_boton_editar" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textoGuardarCambios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="0dp"
+                android:text="Desea guardar los cambios?"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                android:fontFamily="@font/khularegular"
+                />
+
+            <LinearLayout
+                android:id="@+id/menuLinearLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/midTableLayout"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <ImageView
+                    android:id="@+id/cancelar"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_boton_cancelar" />
+
+                <ImageView
+                    android:id="@+id/aceptar"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_boton_aceptar" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textoEliminarElemento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="0dp"
+                android:text="Desea eliminar este mensaje?"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:fontFamily="@font/khularegular"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/menuEliminar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/midTableLayout"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <ImageView
+                    android:id="@+id/cancelarEliminar"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_boton_cancelar" />
+
+                <ImageView
+                    android:id="@+id/aceptarEliminar"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_boton_aceptar" />
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
