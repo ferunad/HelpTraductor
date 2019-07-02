@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,11 +18,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class ListaVideos extends AppCompatActivity {
+
     private ListView listaElementos;
     private AdaptadorVideos adaptador;
     private String TAG ="Link Videos" ;
     private ArrayList<listados> listadeElemtnosNo=new ArrayList<listados>();
-
+    private ImageView botonRegresar;
 
 
     @Override
@@ -29,6 +31,7 @@ public class ListaVideos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_videos);
         listaElementos =findViewById(R.id.ListaTareas2);
+        botonRegresar=findViewById(R.id.botonVolver);
         listaElementos.setClickable(true);
         listados video1=new listados("Vocabulario Básico 1 - Lengua de Señas Colombiana LSC","https://youtu.be/EOcVvy1mcYI");
         listados video2=new listados("Vocabulario Básico 2 - Lengua de Señas Colombiana LSC","https://youtu.be/q8j1aXIRCv8");
@@ -55,6 +58,13 @@ public class ListaVideos extends AppCompatActivity {
                 String url=item.getUrl();
                 Intent vista=new Intent("android.intent.action.VIEW", Uri.parse(url));
                 startActivity(vista);
+            }
+        });
+
+        botonRegresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

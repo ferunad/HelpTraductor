@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListaApliacaciones" android:theme="@style/sinBarra"></activity>
+        <activity android:name=".ListaDiccionarios" android:theme="@style/sinBarra" ></activity>
+        <activity
+            android:name=".ListaApliacaciones"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".ListaVideos"
             android:theme="@style/sinBarra" />

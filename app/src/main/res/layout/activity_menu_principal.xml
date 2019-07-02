@@ -8,6 +8,7 @@
     android:background="@drawable/fondo_pantallas_2">
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="318dp"
         android:layout_height="59dp"
         android:fontFamily="@font/quicksandbold"
@@ -22,37 +23,48 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.041" />
 
-    <ImageButton
-        android:id="@+id/videos"
-        android:layout_width="91dp"
-        android:layout_height="100dp"
+    <ImageView
+        android:id="@+id/botonVideos"
+        android:layout_width="77dp"
+        android:layout_height="70dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.171"
+        app:layout_constraintHorizontal_bias="0.154"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.205"
-        app:srcCompat="@drawable/ic_botonvideos_2" />
+        app:layout_constraintVertical_bias="0.214"
+        app:srcCompat="@drawable/ic_icono_videos" />
 
-    <ImageButton
-        android:id="@+id/videos2"
-        android:layout_width="245dp"
-        android:layout_height="382dp"
+    <ImageView
+        android:id="@+id/botonApps"
+        android:layout_width="73dp"
+        android:layout_height="89dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintHorizontal_bias="0.816"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.204"
-        app:srcCompat="@drawable/ic_icono_apps" />
+        app:layout_constraintVertical_bias="0.206"
+        app:srcCompat="@drawable/ic_iconos_apps_1" />
+
+    <ImageView
+        android:id="@+id/botonDiccionarios"
+        android:layout_width="104dp"
+        android:layout_height="112dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.412"
+        app:srcCompat="@drawable/ic_icono_diccionario" />
 </androidx.constraintlayout.widget.ConstraintLayout>
