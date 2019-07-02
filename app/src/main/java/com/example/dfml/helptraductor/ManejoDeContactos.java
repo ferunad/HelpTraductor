@@ -44,7 +44,7 @@ public class ManejoDeContactos {
             baseDatos = FirebaseDatabase.getInstance();
 
             //especificacion de la base de la ruta a la base de datos
-            DatabaseReference myRef = baseDatos.getReference("Usuarios/"+id+"/Contactos");
+            DatabaseReference myRef = baseDatos.getReference("Usuarios/"+id+"/Contactos"+celular);
             try {
                 myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     //verificamos con el contacto no este repetido
@@ -100,7 +100,7 @@ public class ManejoDeContactos {
             baseDatos = FirebaseDatabase.getInstance();
 
             //especificacion de la base de la ruta a la base de datos
-            DatabaseReference myRef = baseDatos.getReference("Usuarios/"+id+"/Contactos");
+            DatabaseReference myRef = baseDatos.getReference("Usuarios/"+id+"/Contactos"+celular);
             try {
                 myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     //verificamos con el contacto exista

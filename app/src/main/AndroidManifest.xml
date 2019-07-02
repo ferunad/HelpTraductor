@@ -12,7 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OpcionesContactos" android:theme="@style/sinBarra"></activity>
+        <activity android:name=".OpcionesMensajes" android:theme="@style/sinBarra"></activity>
+        <activity android:name=".CrearMensajes"  android:theme="@style/sinBarra"/>
+        <activity android:name=".ListaMensajes"  android:theme="@style/sinBarra"/>
+        <activity
+            android:name=".OpcionesContactos"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".CrearContacto"
             android:theme="@style/sinBarra" />
