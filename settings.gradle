@@ -1,1 +1,1 @@
-include ':app', ':HelpTranslator'
+include ':app'
