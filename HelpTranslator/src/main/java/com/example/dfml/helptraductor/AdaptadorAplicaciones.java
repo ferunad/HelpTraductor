@@ -17,6 +17,7 @@ public class AdaptadorAplicaciones extends BaseAdapter   {
         this.context = context;
         this.listItems = listItems;
     }
+// cometario fernando
 
     @Override
     public int getCount() {
