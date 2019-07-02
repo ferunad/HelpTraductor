@@ -17,7 +17,7 @@ public class AdaptadorAplicaciones extends BaseAdapter   {
         this.context = context;
         this.listItems = listItems;
     }
-// cometario fernando - prueba adicional
+// cometario fernando - prueba adicional - nueo
 
     @Override
     public int getCount() {
