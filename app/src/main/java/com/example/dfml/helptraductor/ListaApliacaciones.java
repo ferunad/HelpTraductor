@@ -13,35 +13,51 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class ListaApliacaciones extends AppCompatActivity {
+
+    //Variables
     private ListView listaElementos;
     private AdaptadorAplicaciones adaptador;
     private String TAG ="Links aplicaciones" ;
     private ArrayList<listados> listadeElemtnosNo=new ArrayList<listados>();
+    private listados[] listaAplicaciones = new listados[9];
     private ImageView botonRegresar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_apliacaciones);
+
+        // conexiones de elementos con el xml
         listaElementos =findViewById(R.id.ListaTareas2);
         botonRegresar=findViewById(R.id.botonVolver);
 
+        //creacion de los objetos de la lista
+        listaAplicaciones[0]=new listados("Asistente de sordos y mudos","https://play.google.com/store/apps/details?id=com.ncatz.yeray.deafmutehelper&hl=es");
+        listaAplicaciones[1]=new listados("Sordo Ayuda","https://play.google.com/store/apps/details?id=com.yeho.tuvoz&hl=es");
+        listaAplicaciones[2]=new listados("Dilo en señas","https://play.google.com/store/apps/details?id=com.jaguarlabs.lsm&hl=es");
+        listaAplicaciones[3]=new listados("Despertador para Sordos (mDVA)","https://play.google.com/store/apps/details?id=ar.com.innoligent.moderndva2&hl=es");
+        listaAplicaciones[4]=new listados("Háblalo","https://play.google.com/store/apps/details?id=appinventor.ai_mateo_nicolas_salvatto.Sordos&hl=es");
+        listaAplicaciones[5]=new listados("aprender lenguaje de señas","https://play.google.com/store/apps/details?id=mimo.language.sign&hl=es");
+        listaAplicaciones[6]=new listados("Sordo-Mudo Ayudante","https://play.google.com/store/apps/details?id=com.jpgironb.assistiveguru&hl=es");
+        listaAplicaciones[7]=new listados("Aprende el lenguaje de señas gratis","https://play.google.com/store/apps/details?id=com.LearnSignLanguageFree.Mimpiandroid&hl=es");
+        listaAplicaciones[8]=new listados("STranscripción instantánea","https://play.google.com/store/apps/details?id=com.google.audio.hearing.visualization.accessibility.scribe&hl=es");
+
+
+
+        //agregar los objetos al arraylist
+        for(int i = 0; i< listaAplicaciones.length; i++){
+            listadeElemtnosNo.add(listaAplicaciones[i]);
+        }
+
+        // hacemos que se pueda interactuar con la lista
         listaElementos.setClickable(true);
-        listados video1=new listados("Vocabulario Básico 1 - Lengua de Señas Colombiana LSC","https://youtu.be/EOcVvy1mcYI");
-        listados video2=new listados("Vocabulario Básico 2 - Lengua de Señas Colombiana LSC","https://youtu.be/q8j1aXIRCv8");
-        listados video3=new listados("Vocabulario Básico 3 - Verbos Curso Lengua de Señas Colombiana","https://youtu.be/-8e3FaA-Rak");
-        listados video4=new listados("Vocabulario Básico 4 - Verbos Curso Lengua de Señas Colombiana","https://youtu.be/-8e3FaA-Rak");
-        listados video5=new listados("Lección 1 - Cómo saludar en lengua de señas (LSC)","https://youtu.be/BTe1ulzazio");
-        listados video6=new listados("Lección 2 - Las diez señas que debes saber (LSC)","https://youtu.be/xXC_x4Jvnj8");
-        listados video7=new listados("10 Señas Básicas (LSM) | Tutorial Rápido","https://youtu.be/rLL4LJdPRtY");
-        listadeElemtnosNo.add(video1);
-        listadeElemtnosNo.add(video2);
-        listadeElemtnosNo.add(video3);
-        listadeElemtnosNo.add(video4);
-        listadeElemtnosNo.add(video5);
-        listadeElemtnosNo.add(video6);
-        listadeElemtnosNo.add(video7);
+
+        //Creamos el adaptador que se encarga de traducir los elementos del arraylist a la lista visual
         adaptador=new AdaptadorAplicaciones(ListaApliacaciones.this,listadeElemtnosNo);
         listaElementos.setAdapter(adaptador);
+
+        //creamos el listener encargado de las accciones en caso de que se interactue con un elemento de la lista
         listaElementos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -53,6 +69,7 @@ public class ListaApliacaciones extends AppCompatActivity {
             }
         });
 
+        //boton de regresar que finaliza la activity para volver a la anterior
         botonRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

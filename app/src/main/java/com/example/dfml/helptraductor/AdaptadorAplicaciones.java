@@ -10,14 +10,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class AdaptadorAplicaciones extends BaseAdapter   {
+    //Variables
     private Context context;
     private ArrayList<listados> listItems;
 
+    // Getters, setter y constructor
     public AdaptadorAplicaciones(Context context, ArrayList<listados> listItems) {
         this.context = context;
         this.listItems = listItems;
     }
-
     @Override
     public int getCount() {
         return listItems.size();
@@ -34,10 +35,17 @@ public class AdaptadorAplicaciones extends BaseAdapter   {
     }
 
     @Override
+    //Metodo para crear las vistas de los elementos de la lista
     public View getView(int position, View convertView, ViewGroup parent) {
         listados item=(listados) getItem(position);
+
+        //asignamos la view a el xml plantilla
         convertView=LayoutInflater.from(context).inflate(R.layout.item_apliaciones,null);
+
+        //referenciamos el textview de la plantilla
         TextView titulo=(TextView) convertView.findViewById(R.id.titulo);
+
+        //cambiamos el texto de la plantilla en base a la información del item
         titulo.setText(item.getNombre());
         return convertView;
     }

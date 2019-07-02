@@ -1,11 +1,15 @@
 package com.example.dfml.helptraductor;
 
 public class Usuario {
+
+    //Variables
     private String correo;
     private String nombre;
     private String celular;
     private String constrasena;
     private String id;
+
+    //Getters, Setters y Constructor
     public Usuario(String correo, String nombre, String celular, String constrasena, String id) {
         this.correo = correo;
         this.nombre = nombre;
@@ -13,8 +17,6 @@ public class Usuario {
         this.constrasena = constrasena;
         this.id = id;
     }
-
-
     public Usuario(){
 
     }

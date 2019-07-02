@@ -1,16 +1,19 @@
 package com.example.dfml.helptraductor;
 
 public class listados {
+
+    //variables
     public String nombre;
     public String url;
 
+    //Getters, Setters y constructor
     public listados(String nombre, String url) {
         this.nombre = nombre;
         this.url = url;
     }
     public listados() {
-
     }
+
     public String getUrl() {
         return url;
     }
