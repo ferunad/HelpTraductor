@@ -67,6 +67,7 @@ public class ListaContactos extends AppCompatActivity {
             //traermos una copia de los datos de la base de datos
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                listadeContactos.clear();
                 //transcribimos esa copia de los contactos a un objeto y lo agregamos a un array list
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Contactos temporal=postSnapshot.getValue(Contactos.class);
@@ -144,13 +145,4 @@ public class ListaContactos extends AppCompatActivity {
             }
         });
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //se reinician las listas para que no haya problemas de valores repetidos
-        listaElementos.setAdapter(null);
-        listadeContactos.clear();
-    }
-
 }

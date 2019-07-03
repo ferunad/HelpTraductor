@@ -73,6 +73,7 @@ public class ListaMensajes extends AppCompatActivity {
             //traermos una copia de los datos de la base de datos
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                listadeMensajes.clear();
                 //transcribimos esa copia de los mensajes a un objeto y lo agregamos a un array list
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     Mensajes temporal=postSnapshot.getValue(Mensajes.class);
@@ -149,13 +150,6 @@ public class ListaMensajes extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //se reinician las listas para que no haya problemas de valores repetidos
-        listaElementos.setAdapter(null);
-        listadeMensajes.clear();
-    }
 
 
 
