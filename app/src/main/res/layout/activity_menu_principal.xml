@@ -98,4 +98,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.639"
         app:srcCompat="@drawable/ic_recurso_27" />
+
+    <Button
+        android:id="@+id/tradcutor"
+        android:layout_width="214dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/boton_redondo_unico"
+        android:fontFamily="@font/quicksandbold"
+        android:text="Traductor"
+        android:textColor="@color/blancoApp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.94" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
