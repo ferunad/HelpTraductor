@@ -12,7 +12,7 @@
         android:layout_width="358dp"
         android:layout_height="59dp"
         android:fontFamily="@font/quicksandbold"
-        android:text="Tradcutor"
+        android:text="Traductor"
         android:textAlignment="center"
         android:textColor="@color/AzulApp"
         android:textSize="38dp"
@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.096" />
 
     <Button
-        android:id="@+id/tradcutor"
+        android:id="@+id/emergencia"
         android:layout_width="118dp"
         android:layout_height="38dp"
         android:layout_marginStart="8dp"

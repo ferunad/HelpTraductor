@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.M" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <dist:module dist:instant="true" />
 
@@ -18,46 +19,58 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ContactoDeEmergencia" android:theme="@style/sinBarra"></activity>
+        <activity android:name=".ContactoDeEmergencia" android:theme="@style/sinBarra"  android:screenOrientation="portrait" ></activity>
         <activity
             android:name=".EscucharHablarTraductor"
-            android:theme="@style/sinBarra" />
+            android:theme="@style/sinBarra"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".OpcionesMensajes"
-            android:theme="@style/sinBarra" />
+            android:theme="@style/sinBarra"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CrearMensajes"
-            android:theme="@style/sinBarra" />
+            android:theme="@style/sinBarra"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ListaMensajes"
-            android:theme="@style/sinBarra" />
+            android:theme="@style/sinBarra"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".OpcionesContactos"
-            android:theme="@style/sinBarra" />
+            android:theme="@style/sinBarra"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CrearContacto"
-            android:theme="@style/sinBarra" />
+            android:theme="@style/sinBarra"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ListaContactos"
-            android:theme="@style/sinBarra" />
+            android:theme="@style/sinBarra"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ListaDiccionarios"
-            android:theme="@style/sinBarra" />
+            android:theme="@style/sinBarra"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ListaApliacaciones"
-            android:theme="@style/sinBarra" />
+            android:theme="@style/sinBarra"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ListaVideos"
-            android:theme="@style/sinBarra" />
+            android:theme="@style/sinBarra"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".RegistrarUsuario"
-            android:theme="@style/sinBarra" />
+            android:theme="@style/sinBarra"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MenuPrincipal"
-            android:theme="@style/sinBarra" />
+            android:theme="@style/sinBarra"  android:screenOrientation="portrait" />
         <activity
             android:name=".PantallaPrincipal"
-            android:theme="@style/sinBarra">
+            android:theme="@style/sinBarra"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

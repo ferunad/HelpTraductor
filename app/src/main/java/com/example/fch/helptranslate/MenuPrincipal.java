@@ -3,17 +3,16 @@ package com.example.fch.helptranslate;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class MenuPrincipal extends AppCompatActivity {
 
     //variables
     private ImageView botonVideos,botonApps,botonDicionarios,botonContactos,botonMensajes;
+    private Button botonEmergencia;
     private Button traductor;
 
     @Override
@@ -28,6 +27,7 @@ public class MenuPrincipal extends AppCompatActivity {
         botonContactos=findViewById(R.id.botonContactos);
         botonMensajes=findViewById(R.id.botonMensajes);
         traductor=findViewById(R.id.tradcutor);
+        botonEmergencia=findViewById(R.id.emergencia);
 
 
         //Listener para el boton que lleva a mensajes
@@ -81,6 +81,13 @@ public class MenuPrincipal extends AppCompatActivity {
             public void onClick(View v) {
                 Intent aplicaciones=new Intent(MenuPrincipal.this,EscucharHablarTraductor.class);
                 startActivity(aplicaciones);
+            }
+        });
+        botonEmergencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent emergencia= new Intent(MenuPrincipal.this,ContactoDeEmergencia.class);
+                startActivity(emergencia);
             }
         });
     }
