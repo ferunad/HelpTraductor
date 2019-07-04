@@ -106,8 +106,6 @@ public class ManejoDeContactos {
                     //verificamos con el contacto exista
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        // si existe procedemos a modificarlo
-                        if (dataSnapshot.exists()){
 
                             //conexion con la base de datos
                             baseDatos= FirebaseDatabase.getInstance();
@@ -121,10 +119,7 @@ public class ManejoDeContactos {
                             //enviamos los datos al servidor
                             myRef.child(celular).setValue(contacto);
 
-                        }else{
-                            //esto se ejecutara si no se logra encontrar el contacto
-                            Toast.makeText(context,"El contacto ya no existe", Toast.LENGTH_SHORT).show();
-                        }
+
                     }
                     @Override
                     public void onCancelled(DatabaseError error) {

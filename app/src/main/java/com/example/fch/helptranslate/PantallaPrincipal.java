@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.OAuthProvider;
 
 public class PantallaPrincipal extends AppCompatActivity implements View.OnClickListener {
@@ -35,6 +36,7 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
     private EditText TextoCorreo,TextoContrasena;
     private Button boton, botonMicrosoft,botonRegistrar;
     //private OAuthProvider.Builder provider = OAuthProvider.newBuilder("microsoft.com");
+
 
 
     @Override
@@ -115,6 +117,13 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
 
         //revisamos si ya hay un cuenta activa
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser==null){
+
+        }else{
+            Intent verificacion=new Intent(PantallaPrincipal.this,MenuPrincipal.class);
+            startActivity(verificacion);
+        }
     }
 
     @Override

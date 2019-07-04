@@ -8,7 +8,7 @@
     android:background="@drawable/fondo_pantallas_2">
 
     <ImageView
-        android:id="@+id/botonVolver2"
+        android:id="@+id/botonVolver"
         android:layout_width="92dp"
         android:layout_height="37dp"
         android:layout_marginStart="8dp"
@@ -33,7 +33,7 @@
         android:textAlignment="center"
         android:textColor="@color/AzulApp"
         android:textSize="38dp"
-        app:layout_constraintTop_toBottomOf="@+id/botonVolver2"
+        app:layout_constraintTop_toBottomOf="@+id/botonVolver"
         tools:layout_editor_absoluteX="0dp" />
 
     <include
@@ -85,6 +85,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ingresarnombre"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/enviarUbicacion"
+        android:layout_width="274dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/boton_redondo_unico_rojo"
+        android:fontFamily="@font/quicksandbold"
+        android:text="Enviar la ubicacion"
+        android:textColor="@color/blancoApp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EnviarMensajeDeEmergencia"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button

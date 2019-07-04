@@ -46,8 +46,8 @@ import com.google.cloud.translate.Translation;
 public class EscucharHablarTraductor extends AppCompatActivity{
     private TextToSpeech miVoz;
     private Translate translate;
-    private String idioma;
-    private Button botonTraducir,botonEspanol, b1;
+    private String idioma,pais;
+    private Button botonTraducir,botonEspanol, b1,botonTutorial;
     private Spinner spinner;
     private ImageView  botonVolver;
     private EditText textoTraducir,textoTraducido;
@@ -58,6 +58,7 @@ public class EscucharHablarTraductor extends AppCompatActivity{
     private ArrayList<Mensajes> listadeMensajes =new ArrayList<Mensajes>();
     private TextView cargando,nohayelementos;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +68,7 @@ public class EscucharHablarTraductor extends AppCompatActivity{
         textoTraducir =(EditText)findViewById(R.id.textoTraducir);
         listaElementos =findViewById(R.id.ListaTareas2);
         botonEspanol= findViewById(R.id.espanol);
+        botonTutorial= findViewById(R.id.botonTutorial);
         b1 = (Button) findViewById(R.id.grabar);
         botonVolver=findViewById(R.id.botonVolver);
         cargando=findViewById(R.id.cargando);
@@ -79,7 +81,8 @@ public class EscucharHablarTraductor extends AppCompatActivity{
 
 
 
-        String[] letra = {"en","de"};
+        final String[] letra = {"en","de","ru","pt","ja","hi","fr","zh-TW","ar"};
+        final String[] lugar = {"USA","DEU","RUS","PRT","JPN","NPL","FRA","CHN","SAU"};
         spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, letra));
 
         b1.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +99,13 @@ public class EscucharHablarTraductor extends AppCompatActivity{
             {
 
                 idioma=(String) adapterView.getItemAtPosition(pos);
+                for(int i=0;i<letra.length;i++){
+                    if(letra[i]==idioma){
+                        pais=lugar[i];
+                    }
+
+
+                }
             }
 
             @Override
@@ -193,6 +203,14 @@ public class EscucharHablarTraductor extends AppCompatActivity{
 
             }
         });
+        botonTutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getTranslateService();
+                traducir("Esta app HelpTranslator y todo lo que yo escribe lo traducirá en audio y cuando yo le acerque el teléfono a usted me debera hablar para que la app me traduzca a texto. Gracias.");
+
+            }
+        });
 
     }
 
@@ -222,7 +240,7 @@ public class EscucharHablarTraductor extends AppCompatActivity{
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
                     // replace this Locale with whatever you want
-                    Locale localeToUse = new Locale(idioma,"COL");
+                    Locale localeToUse = new Locale(idioma,pais);
                     miVoz.setLanguage(localeToUse);
                     miVoz.speak(textoADecir,TextToSpeech.QUEUE_FLUSH,null);
                 }
@@ -282,9 +300,8 @@ public class EscucharHablarTraductor extends AppCompatActivity{
     }
 
     public void grabar(){
-        Locale localeToUse = new Locale(idioma,"US");
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        String language =  "us-US";
+        String language = idioma+"-"+pais;
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, language);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, language);

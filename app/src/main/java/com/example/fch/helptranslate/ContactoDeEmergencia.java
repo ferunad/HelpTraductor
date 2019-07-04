@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -21,15 +25,42 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class ContactoDeEmergencia extends AppCompatActivity {
     private FirebaseDatabase baseDatos;
     private EditText mensaje, celular;
+    LocationManager locationManager;
     private ImageView botonRegresar;
-    private Button botonGuardar,botonEnviar;
+    private Button botonGuardar,botonEnviar,botonUbicación;
     private static final String TAG = "Datos Emergencia";
+    private double longitudeGPS, latitudeGPS;
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.ACCESS_FINE_LOCATION },
+                    10);
+        } else {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.ACCESS_COARSE_LOCATION },
+                        10);
+            } else {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.SEND_SMS },
+                            10);
+                } else {
+
+                }
+            }
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +71,11 @@ public class ContactoDeEmergencia extends AppCompatActivity {
         botonGuardar=findViewById(R.id.botonGuardarEmergencia);
         botonEnviar=findViewById(R.id.EnviarMensajeDeEmergencia);
         botonRegresar=findViewById(R.id.botonVolver);
+        botonUbicación=findViewById(R.id.enviarUbicacion);
+
+
+
+
 
         //revisamos de cual usuario debemos traer la información
         FirebaseUser usuarioActual = FirebaseAuth.getInstance().getCurrentUser();
@@ -106,14 +142,58 @@ public class ContactoDeEmergencia extends AppCompatActivity {
             }
         });
 
+        botonUbicación.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                if (ActivityCompat.checkSelfPermission(ContactoDeEmergencia.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(ContactoDeEmergencia.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                }
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2 * 20 * 1000, 10, locationListenerGPS);
+                if(latitudeGPS==0){
+
+                    Toast.makeText(ContactoDeEmergencia.this, "Espere.. estamos buscado su ubicacion vuelva a oprimir el boton en 5 a 10 segundos", Toast.LENGTH_SHORT).show();
+                }else{
+
+                    verficarPermisos2();
+                }
+
+            }
+        });
 
     }
-    public void enviarMensaje(){
-        String numero = celular.getText().toString();
-        String mensajeEnviar = mensaje.getText().toString();
-        SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage(numero, null, mensajeEnviar, null, null);
-    }
+
+
+
+    private final LocationListener locationListenerGPS = new LocationListener() {
+        public void onLocationChanged(Location location) {
+            longitudeGPS = location.getLongitude();
+            latitudeGPS = location.getLatitude();
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
+
+        public void enviarMensaje() {
+            String numero = celular.getText().toString();
+            String mensajeEnviar = mensaje.getText().toString();
+            SmsManager sms = SmsManager.getDefault();
+            sms.sendTextMessage(numero, null, mensajeEnviar, null, null);
+        }
+
     public void verficarPermisos() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -123,12 +203,30 @@ public class ContactoDeEmergencia extends AppCompatActivity {
             enviarMensaje();
         }
     }
+
+    public void verficarPermisos2() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.SEND_SMS },
+                    10);
+        } else {
+            enviarMensaje2();
+        }
+    }
+    public void enviarMensaje2() {
+        String numero = celular.getText().toString();
+        SmsManager sms = SmsManager.getDefault();
+        String mensajeUbicacion="http://maps.google.com/?q=<"+latitudeGPS+">,<"+longitudeGPS+">";
+        sms.sendTextMessage(numero, null, mensajeUbicacion , null, null);
+        Toast.makeText(ContactoDeEmergencia.this, "Mensaje enviado"+latitudeGPS+" "+longitudeGPS, Toast.LENGTH_SHORT).show();
+    }
+
     @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                                      @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 10) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                enviarMensaje();
+
             }else{
                 //User denied Permission.
             }
