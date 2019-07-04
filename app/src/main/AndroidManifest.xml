@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="com.example.dfml.helptraductor">
-    <uses-permission android:name = "android.permission.INTERNET" />
+    package="com.example.fch.helptranslate">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <uses-permission android:name="android.permission.M"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.M" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <dist:module dist:instant="true" />
 
@@ -19,7 +18,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EscucharHablarTraductor" android:theme="@style/sinBarra"></activity>
+        <activity android:name=".ContactoDeEmergencia" android:theme="@style/sinBarra"></activity>
+        <activity
+            android:name=".EscucharHablarTraductor"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".OpcionesMensajes"
             android:theme="@style/sinBarra" />
