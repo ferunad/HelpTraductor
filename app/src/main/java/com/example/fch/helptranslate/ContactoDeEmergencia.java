@@ -64,6 +64,7 @@ public class ContactoDeEmergencia extends AppCompatActivity {
                         mensaje.setText(mensajeTemporal);
                         celular.setText(celularTemporal);
 
+
                     } else {
                         Toast.makeText(ContactoDeEmergencia.this, "Aun no se a asignado un mensaje de emergencia", Toast.LENGTH_SHORT).show();
                     }
@@ -85,6 +86,7 @@ public class ContactoDeEmergencia extends AppCompatActivity {
             public void onClick(View v) {
                 ManejoDeMensajesEmergencia actualizar= new ManejoDeMensajesEmergencia(ContactoDeEmergencia.this);
                 actualizar.registroMensajes(mensaje.getText().toString(),celular.getText().toString());
+                Toast.makeText(ContactoDeEmergencia.this, "Datos Guardados", Toast.LENGTH_SHORT).show();
 
             }
         }
@@ -93,6 +95,7 @@ public class ContactoDeEmergencia extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 verficarPermisos();
+                Toast.makeText(ContactoDeEmergencia.this, "Mensaje enviado", Toast.LENGTH_SHORT).show();
             }
         });
 
