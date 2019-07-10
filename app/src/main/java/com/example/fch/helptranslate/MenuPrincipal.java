@@ -14,7 +14,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
     //variables
     private ImageView botonVideos,botonApps,botonDicionarios,botonContactos,botonMensajes;
-    private Button botonEmergencia,cerrarSesion;
+    private Button botonEmergencia,cerrarSesion,botonPerfil;
     private Button traductor;
 
     @Override
@@ -31,6 +31,7 @@ public class MenuPrincipal extends AppCompatActivity {
         traductor=findViewById(R.id.tradcutor);
         botonEmergencia=findViewById(R.id.emergencia);
         cerrarSesion=findViewById(R.id.CerrarSesion);
+        botonPerfil=findViewById(R.id.perfil);
 
         //Listener para el boton que lleva a mensajes
         botonMensajes.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +99,14 @@ public class MenuPrincipal extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 finish();
+            }
+        });
+
+        botonPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent perfil=new Intent(MenuPrincipal.this,administradorPerfil.class);
+                startActivity(perfil);
             }
         });
     }

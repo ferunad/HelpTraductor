@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".administradorPerfil"
+    android:background="@drawable/fondo_pantallas_2"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/botonVolver"
+                android:layout_width="92dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:srcCompat="@drawable/ic_recurso_16" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/quicksandbold"
+                android:text="Perfil"
+                android:textAlignment="center"
+                android:textColor="@color/AzulApp"
+                android:textSize="40dp" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/khularegular"
+                android:text="Realiza los cambios a tu perfil y guarda los cambios"
+                android:textAlignment="center"
+                android:textColor="@color/AzulApp"
+                android:textSize="14dp" />
+
+            <include
+                android:id="@+id/ingresarnombre"
+                layout="@layout/campo_texto_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"></include>
+
+            <include
+                android:id="@+id/ingresarcontrasena"
+                layout="@layout/campo_texto_contrasena"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"></include>
+
+            <include
+                android:id="@+id/ingresarcorreo"
+                layout="@layout/campo_texto_correo"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"></include>
+
+            <include
+                android:id="@+id/ingresarcelular"
+                layout="@layout/campo_texto_celular"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"></include>
+
+            <Button
+                android:id="@+id/botonCrear"
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:autoText="false"
+                android:background="@drawable/boton_redondo_unico"
+                android:elevation="2dp"
+                android:fontFamily="@font/quicksandmedium"
+                android:text="Guardar"
+                android:textColor="#f7f8f8" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

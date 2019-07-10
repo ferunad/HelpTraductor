@@ -188,6 +188,8 @@ public class InicioSesionTodosLosCasos {
 
                             //sobre escribimos los datos existentes con los nuevos
                             myRef.child(id).setValue(usuario);
+
+                        Toast.makeText(context, "Datos guardados con exito", Toast.LENGTH_SHORT).show();
                     }
 
                     // en caso de que haya algun problema de conexion

@@ -17,64 +17,88 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/> <activity android:name="com.facebook.FacebookActivity" android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:label="@string/app_name" /> <activity android:name="com.facebook.CustomTabActivity" android:exported="true"> <intent-filter> <action android:name="android.intent.action.VIEW" /> <category android:name="android.intent.category.DEFAULT" /> <category android:name="android.intent.category.BROWSABLE" /> <data android:scheme="@string/fb_login_protocol_scheme" /> </intent-filter> </activity>
-        <activity android:name=".ContactoDeEmergencia" android:theme="@style/sinBarra"  android:screenOrientation="portrait" ></activity>
+        <activity android:name=".administradorPerfil"  android:theme="@style/sinBarra" ></activity>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ContactoDeEmergencia"
+            android:screenOrientation="portrait"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".EscucharHablarTraductor"
-            android:theme="@style/sinBarra"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".OpcionesMensajes"
-            android:theme="@style/sinBarra"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".CrearMensajes"
-            android:theme="@style/sinBarra"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".ListaMensajes"
-            android:theme="@style/sinBarra"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".OpcionesContactos"
-            android:theme="@style/sinBarra"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".CrearContacto"
-            android:theme="@style/sinBarra"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".ListaContactos"
-            android:theme="@style/sinBarra"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".ListaDiccionarios"
-            android:theme="@style/sinBarra"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".ListaApliacaciones"
-            android:theme="@style/sinBarra"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".ListaVideos"
-            android:theme="@style/sinBarra"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".RegistrarUsuario"
-            android:theme="@style/sinBarra"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".MenuPrincipal"
-            android:theme="@style/sinBarra"  android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".PantallaPrincipal"
-            android:theme="@style/sinBarra"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/sinBarra">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

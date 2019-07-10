@@ -80,7 +80,7 @@ public class ListaVideos extends AppCompatActivity {
                 listados item = (listados) adaptador.getItem(position);
                 String nombre=item.getNombre();
                 String url=item.getUrl();
-                Intent vista=new Intent("android.intent.action.VIEW", Uri.parse(url));
+                Intent vista=new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(vista);
             }
         });
