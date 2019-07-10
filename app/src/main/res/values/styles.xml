@@ -12,4 +12,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="BlackNoBarsTheme" parent="android:Theme.Black.NoTitleBar.Fullscreen"/>
+    <style name="BlackNoTitleBarTheme" parent="android:Theme.Black.NoTitleBar"/>
 </resources>

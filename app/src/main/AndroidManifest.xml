@@ -22,6 +22,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".administradorPerfil"  android:theme="@style/sinBarra" ></activity>
+        <activity
+            android:label="@string/fragment_demo_name"
+            android:name=".FragmentDemoActivity"
+            android:screenOrientation="nosensor"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+            <meta-data android:name="@string/minVersion" android:value="11"/>
+            <meta-data android:name="@string/isLaunchableActivity" android:value="true"/>
+        </activity>
+
+        <activity
+            android:screenOrientation="portrait"
+            android:label="@string/fullscreen_demo_name"
+            android:name=".FullscreenDemoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/BlackNoTitleBarTheme">
+            <meta-data android:name="@string/minVersion" android:value="8"/>
+            <meta-data android:name="@string/isLaunchableActivity" android:value="true"/>
+        </activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

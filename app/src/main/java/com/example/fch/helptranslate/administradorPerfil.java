@@ -121,6 +121,7 @@ public class administradorPerfil extends AppCompatActivity {
                         TextoNombre.setText(nombre);
                     } else {
                         Toast.makeText(administradorPerfil.this, "No hay datos de usuario", Toast.LENGTH_SHORT).show();
+
                     }
                 }
 
@@ -135,6 +136,7 @@ public class administradorPerfil extends AppCompatActivity {
             Toast.makeText(administradorPerfil.this, "No se pudo acceder a la informacion del contacto",
                     Toast.LENGTH_SHORT).show();
         }
+
 
     }
 

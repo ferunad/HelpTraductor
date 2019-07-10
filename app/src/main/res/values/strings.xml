@@ -3,4 +3,13 @@
     <string name="tokenIngreso">799860544077-9t15tsh188svvct721eum5d4sh3f47fg.apps.googleusercontent.com</string>
     <string name="facebook_app_id">476441666506127</string>
     <string name="fb_login_protocol_scheme">fb476441666506127</string>
+    <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+    <string name="fragment_demo_name">Simple PlayerFragment</string>
+    <string name="playerfragment_text">This is a YouTubePlayerFragment!</string>
+    <string name="minVersion">minVersion</string>
+    <string name="isLaunchableActivity">isLaunchableActivity</string>
+    <string name="fullscreen_tutorial">This is a demo which shows how to handle fullscreen behaviour. This activity has differents layouts for portrait, landscape and fullscreen. The user can enter fullscreen either by using the player controller or programmatically by the programmer (here using a button). If your activity does not have a landscape layout, you can choose to automatically enter fullscreen when the device is rotated to landscape orientation.</string>
+    <string name="enter_fullscreen">Enter Fullscreen</string>
+    <string name="landscape_fullscreen">Always fullscreen in landscape</string>
+    <string name="fullscreen_demo_name">Custom Fullscreen Handling</string>
 </resources>

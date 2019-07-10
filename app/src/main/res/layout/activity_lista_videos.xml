@@ -9,7 +9,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:focusable="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,10 +25,12 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+                android:focusable="false"
                 app:srcCompat="@drawable/ic_recurso_16" />
 
             <TextView
                 android:id="@+id/textView8"
+                android:focusable="false"
                 android:layout_width="match_parent"
                 android:layout_height="59dp"
                 android:fontFamily="@font/quicksandbold"
@@ -37,6 +40,7 @@
                 android:textSize="38dp" />
 
             <ListView
+                android:focusable="false"
                 android:id="@+id/ListaTareas2"
                 android:layout_width="match_parent"
                 android:layout_height="562dp"
