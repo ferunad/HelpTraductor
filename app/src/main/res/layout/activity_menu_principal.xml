@@ -166,6 +166,20 @@
                 android:text="Traductor"
                 android:textColor="@color/blancoApp" />
 
+            <Button
+                android:id="@+id/CerrarSesion"
+                android:layout_width="197dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/boton_redondo_unico"
+                android:fontFamily="@font/quicksandbold"
+                android:text="Cerrar Sesion"
+                android:textColor="@color/blancoApp" />
+
         </LinearLayout>
     </ScrollView>
 

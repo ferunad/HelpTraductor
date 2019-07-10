@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Help Traductor</string>
+    <string name="tokenIngreso">799860544077-9t15tsh188svvct721eum5d4sh3f47fg.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">476441666506127</string> <string name="fb_login_protocol_scheme">fb476441666506127</string>
 </resources>

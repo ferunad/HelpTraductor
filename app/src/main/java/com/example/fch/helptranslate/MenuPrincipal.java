@@ -8,11 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MenuPrincipal extends AppCompatActivity {
 
     //variables
     private ImageView botonVideos,botonApps,botonDicionarios,botonContactos,botonMensajes;
-    private Button botonEmergencia;
+    private Button botonEmergencia,cerrarSesion;
     private Button traductor;
 
     @Override
@@ -28,7 +30,7 @@ public class MenuPrincipal extends AppCompatActivity {
         botonMensajes=findViewById(R.id.botonMensajes);
         traductor=findViewById(R.id.tradcutor);
         botonEmergencia=findViewById(R.id.emergencia);
-
+        cerrarSesion=findViewById(R.id.CerrarSesion);
 
         //Listener para el boton que lleva a mensajes
         botonMensajes.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +90,14 @@ public class MenuPrincipal extends AppCompatActivity {
             public void onClick(View v) {
                 Intent emergencia= new Intent(MenuPrincipal.this,ContactoDeEmergencia.class);
                 startActivity(emergencia);
+            }
+        });
+
+        cerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                finish();
             }
         });
     }

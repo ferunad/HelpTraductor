@@ -11,6 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -23,10 +30,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.OAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class PantallaPrincipal extends AppCompatActivity implements View.OnClickListener {
 
@@ -36,7 +45,11 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
     private EditText TextoCorreo,TextoContrasena;
-    private Button boton, botonMicrosoft,botonRegistrar;
+    private Button boton,botonRegistrar;
+    private FirebaseDatabase baseDatos;
+    private CallbackManager callbackManager;
+    private LoginButton facebook;
+
     //private OAuthProvider.Builder provider = OAuthProvider.newBuilder("microsoft.com");
 
 
@@ -46,17 +59,18 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantalla_principal);
 
+
         //conexiones con el xml
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         TextoCorreo=findViewById(R.id.correo);
         TextoContrasena=findViewById(R.id.contrasena);
         boton=findViewById(R.id.botonCrear);
-        botonMicrosoft =findViewById(R.id.botonFacebook);
         boton=findViewById(R.id.botonCrear);
         botonRegistrar=findViewById(R.id.botonRegistrarse);
+        facebook=findViewById(R.id.login_button);
 
         //Acceder con google
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.tokenIngreso)).requestEmail().build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         //opciones visuales del boton de google
@@ -66,6 +80,8 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
 
         //conectamos con la base de datos
         mAuth = FirebaseAuth.getInstance();
+        baseDatos=FirebaseDatabase.getInstance();
+        callbackManager = CallbackManager.Factory.create();
 
         //boton que ejecuta los metodos para acceder con correo y contrasena
         boton.setOnClickListener(new View.OnClickListener() {
@@ -84,31 +100,29 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
             }
         });
 
-        //boton para registrarse con cuenta de microsoft
-        /*
-        botonMicrosoft.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
+        facebook = (LoginButton) findViewById(R.id.login_button);
 
-                mAuth.startActivityForSignInWithProvider(PantallaPrincipal.this, provider.build()).addOnSuccessListener(
-                                new OnSuccessListener<AuthResult>() {
-                                    @Override
-                                    public void onSuccess(AuthResult authResult) {
+        callbackManager = CallbackManager.Factory.create();
 
-                                    }
-                                })
-                        .addOnFailureListener(
-                                new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        // App code
+                        handleFacebookAccessToken(loginResult.getAccessToken());
+                    }
 
-                                    }
-                                });
+                    @Override
+                    public void onCancel() {
+                        // App code
+                    }
 
-            }
+                    @Override
+                    public void onError(FacebookException exception) {
+                        // App code
+                    }
+                });
 
-
-        });*/
 
     }
 
@@ -145,8 +159,10 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
     }
 
     //resultado de acceder
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == RC_SIGN_IN) {
             //ejecutamos la tarea de inciar sesión
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
@@ -168,7 +184,7 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
 
         }
     }
-    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
+    public void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -178,20 +194,7 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            //extracion de datos
-                            String correo= acct.getEmail();
-                            String nombre=acct.getDisplayName();
-                            String numeroBasico="0";
-                            String contrasena="0";
-                            String uid=user.getUid();
-
-                            //registramos el usuario en la base de datos basandonos en los datos que ingreso para la autentificacion con firebase
-                            InicioSesionTodosLosCasos usuario=new InicioSesionTodosLosCasos(PantallaPrincipal.this);
-
-                            //usarmos el metodo de registro de usurios creado anteriormente
-                            usuario.registroUsuarios( correo, nombre,numeroBasico,contrasena,uid);
+                            guardarDatosFirebase(acct);
 
 
                         } else {
@@ -246,7 +249,62 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
                     });
         }
     }
+    public void guardarDatosFirebase(GoogleSignInAccount acct){
 
+        Log.d(TAG, "signInWithCredential:success");
+        FirebaseUser user = mAuth.getCurrentUser();
+        //extracion de datos
+        String correo= acct.getEmail();
+        String nombre= acct.getDisplayName();
+        String numeroBasico="0";
+        String contrasena="0";
+        String uid=user.getUid();
+
+        //registramos el usuario en la base de datos basandonos en los datos que ingreso para la autentificacion con firebase
+        InicioSesionTodosLosCasos usuario=new InicioSesionTodosLosCasos(PantallaPrincipal.this);
+
+        //usarmos el metodo de registro de usurios creado anteriormente
+        usuario.registroUsuarios( correo, nombre,numeroBasico,contrasena,uid);
+
+    }
+
+    private void handleFacebookAccessToken(AccessToken token) {
+        Log.d(TAG, "handleFacebookAccessToken:" + token);
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            //extracion de datos
+                            String correo= user.getEmail();
+                            String nombre= user.getDisplayName();
+                            String numeroBasico="0";
+                            String contrasena="0";
+                            String uid=user.getUid();
+
+                            //registramos el usuario en la base de datos basandonos en los datos que ingreso para la autentificacion con firebase
+                            InicioSesionTodosLosCasos usuario=new InicioSesionTodosLosCasos(PantallaPrincipal.this);
+
+                            //usarmos el metodo de registro de usurios creado anteriormente
+                            usuario.registroUsuarios( correo, nombre,numeroBasico,contrasena,uid);
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Toast.makeText(PantallaPrincipal.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        // ...
+                    }
+                });
+    }
 
 
 }
