@@ -33,9 +33,10 @@
                 app:srcCompat="@drawable/ic_recurso_16" />
 
             <TextView
-                android:layout_marginTop="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="59dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/quicksandbold"
                 android:text="Crear Mensaje"
                 android:textAlignment="center"
@@ -47,6 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:layout_gravity="center"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
@@ -62,6 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_centerInParent="true"
+                android:layout_gravity="center"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
@@ -73,6 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_centerInParent="true"
+                android:layout_gravity="center"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
@@ -82,14 +86,15 @@
                 android:id="@+id/botonCrear"
                 android:layout_width="match_parent"
                 android:layout_height="41dp"
+                android:layout_gravity="center"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="0dp"
                 android:autoText="false"
-                android:fontFamily="@font/quicksand"
                 android:background="@drawable/boton_redondo_unico"
                 android:elevation="2dp"
+                android:fontFamily="@font/quicksand"
                 android:text="Crear Mensaje"
                 android:textColor="#f7f8f8" />
 

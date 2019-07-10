@@ -21,9 +21,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.OAuthProvider;
 
 public class PantallaPrincipal extends AppCompatActivity implements View.OnClickListener {
@@ -157,6 +159,7 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
         try {
             //esto se ejecutara si se incio sesion correctamente y rediccionara al menu principal
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            firebaseAuthWithGoogle(account);
             Intent ir=new Intent(PantallaPrincipal.this,MenuPrincipal.class);
             startActivity(ir);
         } catch (ApiException e) {
@@ -164,6 +167,43 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
 
         }
+    }
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
+        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            //extracion de datos
+                            String correo= acct.getEmail();
+                            String nombre=acct.getDisplayName();
+                            String numeroBasico="0";
+                            String contrasena="0";
+                            String uid=user.getUid();
+
+                            //registramos el usuario en la base de datos basandonos en los datos que ingreso para la autentificacion con firebase
+                            InicioSesionTodosLosCasos usuario=new InicioSesionTodosLosCasos(PantallaPrincipal.this);
+
+                            //usarmos el metodo de registro de usurios creado anteriormente
+                            usuario.registroUsuarios( correo, nombre,numeroBasico,contrasena,uid);
+
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+
+
+                        }
+
+                        // ...
+                    }
+                });
     }
 
     //metodo de inicio de sesion por firebase con correo y contraseña
@@ -206,4 +246,7 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
                     });
         }
     }
+
+
+
 }

@@ -6,127 +6,107 @@
     android:layout_height="match_parent"
     tools:context=".RegistrarUsuario">
 
-    <include
-        android:id="@+id/ingresarcorreo"
-        layout="@layout/campo_texto_correo"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingresarnombre"
-        app:layout_constraintVertical_bias="0.0"></include>
-
-    <include
-        android:id="@+id/ingresarcontrasena"
-        layout="@layout/campo_texto_contrasena"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingresarcorreo"
-        app:layout_constraintVertical_bias="0.0"></include>
-
-
-    <include
-        android:id="@+id/ingresarnombre"
-        layout="@layout/campo_texto_nombre"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
-        app:layout_constraintVertical_bias="0.0"></include>
-
-    <include
-        android:id="@+id/ingresarcelular"
-        layout="@layout/campo_texto_celular"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingresarcontrasena"
-        app:layout_constraintVertical_bias="0.0"></include>
-
-    <Button
-        android:id="@+id/botonCrear"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="41dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:autoText="false"
-        android:background="@drawable/boton_redondo"
-        android:elevation="2dp"
-        android:fontFamily="@font/quicksandmedium"
-        android:text="Registrase"
-        android:textColor="#f7f8f8"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="240dp"
-        android:layout_height="67dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/quicksandbold"
-        android:text="Registrarte"
-        android:textAlignment="center"
-        android:textColor="@color/AzulApp"
-        android:textSize="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="382dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/khularegular"
-        android:text="Vas a proceder a registrarte en nuestra aplicación, por favor ingresa tus datos a continuación"
-        android:textAlignment="center"
-        android:textColor="@color/AzulApp"
-        android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.551"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"
-        app:layout_constraintVertical_bias="0.0" />
+            <ImageView
+                android:id="@+id/botonVolver"
+                android:layout_width="92dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:srcCompat="@drawable/ic_recurso_16" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/quicksandbold"
+                android:text="Registrarte"
+                android:textAlignment="center"
+                android:textColor="@color/AzulApp"
+                android:textSize="40dp" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/khularegular"
+                android:text="Vas a proceder a registrarte en nuestra aplicación, por favor ingresa tus datos a continuación"
+                android:textAlignment="center"
+                android:textColor="@color/AzulApp"
+                android:textSize="14dp" />
+
+            <include
+                android:id="@+id/ingresarnombre"
+                layout="@layout/campo_texto_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"></include>
+
+            <include
+                android:id="@+id/ingresarcontrasena"
+                layout="@layout/campo_texto_contrasena"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"></include>
+
+            <include
+                android:id="@+id/ingresarcorreo"
+                layout="@layout/campo_texto_correo"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"></include>
+
+            <include
+                android:id="@+id/ingresarcelular"
+                layout="@layout/campo_texto_celular"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"></include>
+
+            <Button
+                android:id="@+id/botonCrear"
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:autoText="false"
+                android:background="@drawable/boton_redondo"
+                android:elevation="2dp"
+                android:fontFamily="@font/quicksandmedium"
+                android:text="Registrase"
+                android:textColor="#f7f8f8" />
+        </LinearLayout>
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

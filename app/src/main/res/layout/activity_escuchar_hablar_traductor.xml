@@ -7,236 +7,206 @@
     tools:context=".EscucharHablarTraductor"
     android:background="@drawable/fondo_pantallas_2">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="358dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/quicksandbold"
-        android:text="Traductor"
-        android:textAlignment="center"
-        android:textColor="@color/AzulApp"
-        android:textSize="38dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.377"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botonVolver"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/emergencia"
-        android:layout_width="118dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/boton_redondo_unico"
-        android:fontFamily="@font/quicksandbold"
-        android:text="Traducir a"
-        android:textColor="@color/blancoApp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.043"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoTraducir"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/grabar"
-        android:layout_width="118dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/boton_redondo_unico"
-        android:fontFamily="@font/quicksandbold"
-        android:text="Escuchar"
-        android:textColor="@color/blancoApp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/espanol"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/espanol"
-        android:layout_width="118dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/boton_redondo_unico"
-        android:fontFamily="@font/quicksandbold"
-        android:text="En español"
-        android:textColor="@color/blancoApp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.043"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emergencia"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Spinner
-        android:id="@+id/spinnerIdiomas"
-        android:layout_width="108dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.033"
-        app:layout_constraintStart_toEndOf="@+id/emergencia"
-        app:layout_constraintTop_toBottomOf="@+id/textoTraducir"
-        app:layout_constraintVertical_bias="0.002" />
-
-    <EditText
-        android:id="@+id/textoTraducido"
-        android:layout_width="379dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Leer traducción"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grabar"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/textoTraducir"
-        android:layout_width="375dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="Ingresa tu mensaje"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageView
-        android:id="@+id/botonVolver"
-        android:layout_width="92dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.026"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.011"
-        app:srcCompat="@drawable/ic_recurso_16" />
-
     <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="372dp"
-        android:layout_height="275dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.652"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoTraducido"
-        app:layout_constraintVertical_bias="0.0">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical" >
 
-            <ListView
-                android:id="@+id/ListaTareas2"
-                android:layout_width="wrap_content"
-                android:layout_height="562dp"
+            <ImageView
+                android:id="@+id/botonVolver"
+                android:layout_width="92dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:srcCompat="@drawable/ic_recurso_16" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="59dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/quicksandbold"
+                android:text="Traductor"
+                android:textAlignment="center"
+                android:textColor="@color/AzulApp"
+                android:textSize="38dp" />
+
+            <include
+                android:id="@+id/ingresarnombre"
+                layout="@layout/campo_texto_mensaje_grande_3"
+                android:layout_width="match_parent"
+                android:layout_height="104dp"
+                android:layout_centerInParent="true"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:divider="@null" />
+                android:layout_marginBottom="0dp"></include>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/emergencia"
+                    android:layout_width="116dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/boton_redondo_unico"
+                    android:fontFamily="@font/quicksandbold"
+                    android:text="Traducir a"
+                    android:textColor="@color/blancoApp" />
+
+                <Spinner
+                    android:id="@+id/spinnerIdiomas"
+                    android:layout_width="108dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/espanol"
+                android:layout_width="118dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/boton_redondo_unico"
+                android:fontFamily="@font/quicksandbold"
+                android:text="En español"
+                android:textColor="@color/blancoApp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/grabar"
+                    android:layout_width="118dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/boton_redondo_unico"
+                    android:fontFamily="@font/quicksandbold"
+                    android:text="Escuchar"
+                    android:textColor="@color/blancoApp" />
+
+                <Button
+                    android:id="@+id/botonTutorial"
+                    android:layout_width="163dp"
+                    android:layout_height="38dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/boton_redondo"
+                    android:fontFamily="@font/quicksandbold"
+                    android:text="¿Como funciona?"
+                    android:textColor="@color/blancoApp" />
+            </LinearLayout>
+
+            <include
+                android:id="@+id/ingresarnombre"
+                layout="@layout/campo_texto_mensaje_grande_2"
+                android:layout_width="match_parent"
+                android:layout_height="104dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="0dp"></include>
+
+            <ScrollView
+                android:id="@+id/scrollView2"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp">
+
+                        <ListView
+                            android:id="@+id/ListaTareas2"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:divider="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        </ListView>
+
+                        <TextView
+                            android:id="@+id/cargando"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="@font/khularegular"
+                            android:text="Se esta cargando la lista, por favor espere..."
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.34" />
+
+                        <TextView
+                            android:id="@+id/nohayelementos"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="@font/khularegular"
+                            android:text="No hay Mensajes que mostrar"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.589"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.34" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
         </LinearLayout>
     </ScrollView>
-
-    <TextView
-        android:id="@+id/cargando"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/khularegular"
-        android:text="Se esta cargando la lista, por favor espere..."
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoTraducido"
-        app:layout_constraintVertical_bias="0.769" />
-
-    <TextView
-        android:id="@+id/nohayelementos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="6dp"
-        android:fontFamily="@font/khularegular"
-        android:text="No hay Mensajes que mostrar"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoTraducido"
-        app:layout_constraintVertical_bias="0.767" />
-
-    <Button
-        android:id="@+id/botonTutorial"
-        android:layout_width="142dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/boton_redondo"
-        android:fontFamily="@font/quicksand"
-        android:text="¿Como funciona?
-"
-        android:textColor="@color/blancoApp"
-        app:layout_constraintBottom_toTopOf="@+id/textoTraducido"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.833"
-        app:layout_constraintStart_toEndOf="@+id/grabar"
-        app:layout_constraintTop_toBottomOf="@+id/espanol"
-        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

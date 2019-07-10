@@ -65,7 +65,7 @@ public class EscucharHablarTraductor extends AppCompatActivity{
         setContentView(R.layout.activity_escuchar_hablar_traductor);
         botonTraducir= findViewById(R.id.emergencia);
         spinner = (Spinner) findViewById(R.id.spinnerIdiomas);
-        textoTraducir =(EditText)findViewById(R.id.textoTraducir);
+        textoTraducir =(EditText)findViewById(R.id.mensajeGrande);
         listaElementos =findViewById(R.id.ListaTareas2);
         botonEspanol= findViewById(R.id.espanol);
         botonTutorial= findViewById(R.id.botonTutorial);
@@ -73,7 +73,7 @@ public class EscucharHablarTraductor extends AppCompatActivity{
         botonVolver=findViewById(R.id.botonVolver);
         cargando=findViewById(R.id.cargando);
         nohayelementos=findViewById(R.id.nohayelementos);
-        textoTraducido= findViewById(R.id.textoTraducido);
+        textoTraducido= findViewById(R.id.mensajeGrande2);
 
         //propiedades iniciales
         nohayelementos.setVisibility(View.GONE);
@@ -235,6 +235,7 @@ public class EscucharHablarTraductor extends AppCompatActivity{
 
 
     public void escucharMensaje(final String textoADecir){
+        //metedoo para escuchar los mensajes
         miVoz = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -249,6 +250,7 @@ public class EscucharHablarTraductor extends AppCompatActivity{
     }
 
     public void escucharMensajeEnEspañol(final String textoADecir){
+        // metodo creado para poder escuchar mesajes unicamente en español
         miVoz = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -262,9 +264,7 @@ public class EscucharHablarTraductor extends AppCompatActivity{
         });
     }
     public void  traducir(String mensaje){
-        // Instantiates a client
-
-        // Translates some text into Russian
+        // metodo para traducir
         Translation translation = translate.translate(mensaje, TranslateOption.sourceLanguage("es"), TranslateOption.targetLanguage(idioma));
         escucharMensaje(translation.getTranslatedText());
     }
@@ -300,6 +300,9 @@ public class EscucharHablarTraductor extends AppCompatActivity{
     }
 
     public void grabar(){
+
+        //metodo de reconocimiento de voz integrado con el de google
+
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         String language = idioma+"-"+pais;
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, language);

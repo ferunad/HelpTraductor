@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,6 +24,7 @@ public class RegistrarUsuario extends AppCompatActivity {
     //Variables
     private static final String TAG="Iniciar Sesión";
     private Button boton;
+    private ImageView botonRegresar;
     private FirebaseDatabase baseDatos;
     private FirebaseAuth mAuth;
     private EditText TextoCorreo,TextoContrasena,TextoCelular,TextoNombre;
@@ -39,6 +41,7 @@ public class RegistrarUsuario extends AppCompatActivity {
         TextoCelular=findViewById(R.id.celular);
         TextoNombre=findViewById(R.id.nombre);
         boton=findViewById(R.id.botonCrear);
+        botonRegresar=findViewById(R.id.botonVolver);
 
         //Conexión con la base de datos
         baseDatos=FirebaseDatabase.getInstance();
@@ -48,6 +51,12 @@ public class RegistrarUsuario extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 registrarse();
+            }
+        });
+        botonRegresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

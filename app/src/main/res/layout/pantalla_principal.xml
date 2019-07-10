@@ -7,148 +7,119 @@
     tools:context=".PantallaPrincipal"
     android:background="@drawable/fondo_pantallas_2">
 
-    <include
-        android:id="@+id/ingresarcorreo"
-        layout="@layout/campo_texto_correo"
-        android:layout_width="386dp"
-        android:layout_height="70dp"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0"></include>
-
-    <include
-        android:id="@+id/ingresarcorreo"
-        layout="@layout/campo_texto_contrasena"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.217"></include>
-
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="240dp"
-        android:layout_height="67dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/quicksandbold"
-        android:text="Bienvenido"
-        android:textAlignment="center"
-        android:textColor="@color/AzulApp"
-        android:textSize="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botonCrear"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/botonCrear"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="41dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:autoText="false"
-        android:background="@drawable/boton_redondo_unico"
-        android:elevation="2dp"
-        android:fontFamily="@font/quicksandmedium"
-        android:text="Iniciar Sesión"
-        android:textColor="#f7f8f8"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingresarcorreo"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/botonRegistrarse"
-        android:layout_width="125dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:autoText="false"
-        android:background="@drawable/boton_redondo"
-        android:elevation="2dp"
-        android:fontFamily="@font/quicksandmedium"
-        android:text="Registrate"
-        android:textColor="#f7f8f8"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botonFacebook"
-        app:layout_constraintVertical_bias="0.0" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/botonFacebook"
-        android:layout_width="125dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:autoText="false"
-        android:background="@drawable/boton_redondo"
-        android:elevation="2dp"
-        android:fontFamily="@font/quicksandmedium"
-        android:text="Microsoft"
-        android:textColor="#f7f8f8"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_button"
-        app:layout_constraintVertical_bias="0.0" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="193dp"
+                android:layout_height="163dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:srcCompat="@drawable/ic_logo" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="193dp"
-        android:layout_height="163dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_logo" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/quicksandbold"
+                android:text="Bienvenido"
+                android:textAlignment="center"
+                android:textColor="@color/AzulApp"
+                android:textSize="40dp" />
+
+            <include
+                android:id="@+id/ingresarcorreo"
+                layout="@layout/campo_texto_correo"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"></include>
+
+            <include
+                android:id="@+id/ingresarcorreo"
+                layout="@layout/campo_texto_contrasena"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"></include>
+
+            <Button
+                android:id="@+id/botonCrear"
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:autoText="false"
+                android:background="@drawable/boton_redondo_unico"
+                android:elevation="2dp"
+                android:fontFamily="@font/quicksandmedium"
+                android:text="Iniciar Sesión"
+                android:textColor="#f7f8f8" />
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp">
+
+            </com.google.android.gms.common.SignInButton>
+
+            <Button
+                android:id="@+id/botonFacebook"
+                android:layout_width="125dp"
+                android:layout_height="39dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:autoText="false"
+                android:background="@drawable/boton_redondo"
+                android:elevation="2dp"
+                android:fontFamily="@font/quicksandmedium"
+                android:text="Microsoft"
+                android:textColor="#f7f8f8" />
+
+            <Button
+                android:id="@+id/botonRegistrarse"
+                android:layout_width="125dp"
+                android:layout_height="39dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:autoText="false"
+                android:background="@drawable/boton_redondo"
+                android:elevation="2dp"
+                android:fontFamily="@font/quicksandmedium"
+                android:text="Registrate"
+                android:textColor="#f7f8f8" />
+        </LinearLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
