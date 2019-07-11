@@ -3,6 +3,7 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.example.fch.helptranslate">
 
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -21,12 +22,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EnviarCorreo"  android:screenOrientation="portrait"
-            android:theme="@style/sinBarra" ></activity>
+        <activity android:name=".ReconocerTextoCamara"></activity>
+        <activity
+            android:name=".EnviarCorreo"
+            android:screenOrientation="portrait"
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".administradorPerfil"
             android:screenOrientation="portrait"
-            android:theme="@style/sinBarra"  />
+            android:theme="@style/sinBarra" />
         <activity
             android:name=".FullscreenDemoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -123,6 +127,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="ocr" />
     </application>
 
 </manifest>

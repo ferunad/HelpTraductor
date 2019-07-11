@@ -4,7 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +38,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+
 public class PantallaPrincipal extends AppCompatActivity implements View.OnClickListener {
 
     //variables
@@ -56,7 +64,6 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantalla_principal);
 
-
         //conexiones con el xml
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         TextoCorreo=findViewById(R.id.correo);
@@ -78,7 +85,6 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
         //conectamos con la base de datos
         mAuth = FirebaseAuth.getInstance();
         baseDatos=FirebaseDatabase.getInstance();
-        callbackManager = CallbackManager.Factory.create();
 
         //boton que ejecuta los metodos para acceder con correo y contrasena
         boton.setOnClickListener(new View.OnClickListener() {
@@ -97,46 +103,45 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
             }
         });
 
-        facebook = (LoginButton) findViewById(R.id.login_button);
+        facebook.setReadPermissions(Arrays.asList("email", "public_profile"));
 
         callbackManager = CallbackManager.Factory.create();
-
-        LoginManager.getInstance().registerCallback(callbackManager,
+        facebook.registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        // App code
-                        handleFacebookAccessToken(loginResult.getAccessToken());
+                        AccessToken accessToken = loginResult.getAccessToken();
+                        handleFacebookAccessToken(accessToken);
                     }
 
                     @Override
                     public void onCancel() {
                         // App code
+
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
                         // App code
+
+                        Log.w(TAG, "signInResult:failed code=" + exception);
                     }
                 });
-
-
     }
-
-
     @Override
     protected void onStart() {
         super.onStart();
 
         //revisamos si ya hay un cuenta activa
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseUser currentUser = mAuth.getInstance().getCurrentUser();
         if(currentUser==null){
 
         }else{
             Intent verificacion=new Intent(PantallaPrincipal.this,MenuPrincipal.class);
             startActivity(verificacion);
         }
+
     }
 
     @Override
@@ -166,15 +171,20 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
 
             //usamos el metodo para saber los resultados
             handleSignInResult(task);
+
+        }else{
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+
         }
     }
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
+
             //esto se ejecutara si se incio sesion correctamente y rediccionara al menu principal
+
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             firebaseAuthWithGoogle(account);
-            Intent ir=new Intent(PantallaPrincipal.this,MenuPrincipal.class);
-            startActivity(ir);
+
         } catch (ApiException e) {
             // esto se ejecutara si ahi algun error
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
@@ -193,11 +203,9 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
                             // Sign in success, update UI with the signed-in user's information
                             guardarDatosFirebase(acct);
 
-
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-
 
                         }
 
@@ -262,6 +270,8 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
 
         //usarmos el metodo de registro de usurios creado anteriormente
         usuario.registroUsuarios( correo, nombre,numeroBasico,contrasena,uid);
+        Intent ir=new Intent(PantallaPrincipal.this,MenuPrincipal.class);
+        startActivity(ir);
 
     }
 
@@ -289,6 +299,8 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
 
                             //usarmos el metodo de registro de usurios creado anteriormente
                             usuario.registroUsuarios( correo, nombre,numeroBasico,contrasena,uid);
+                            Intent ir=new Intent(PantallaPrincipal.this,MenuPrincipal.class);
+                            startActivity(ir);
 
                         } else {
                             // If sign in fails, display a message to the user.

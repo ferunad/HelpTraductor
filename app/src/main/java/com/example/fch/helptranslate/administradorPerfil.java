@@ -166,11 +166,14 @@ public class administradorPerfil extends AppCompatActivity {
                         //creamos el objeto en el que se enviaran los datos
 
                         String contrasena = temporal.getConstrasena();
-                       if(contrasena.equals("0")){
-                           botonCambiar.setVisibility(View.GONE);
-                       }else{
-                           botonCambiar.setVisibility(View.VISIBLE);
-                       }
+                        if(contrasena==null){
+                            botonCambiar.setVisibility(View.GONE);
+                        }else if(contrasena.equals("0")){
+                            botonCambiar.setVisibility(View.GONE);
+                        }else{
+                            botonCambiar.setVisibility(View.VISIBLE);
+                        }
+
                     } else {
                         Toast.makeText(administradorPerfil.this, "No hay datos de usuario", Toast.LENGTH_SHORT).show();
 

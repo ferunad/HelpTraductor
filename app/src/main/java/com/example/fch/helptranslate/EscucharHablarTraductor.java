@@ -85,11 +85,12 @@ public class EscucharHablarTraductor extends AppCompatActivity{
         listaElementos.setClickable(true);
 
         //lista con los idiomas
-        final String[] letra = {"en","de","ru","pt","ja","hi","fr","zh-TW","ar"};
-        final String[] lugar = {"USA","DEU","RUS","PRT","JPN","NPL","FRA","CHN","SAU"};
+        final String[] nombre = {"Chino", "German", "Ingles", "hindi", "Arabe", "Portugués", "Bengali", "Ruso", "Japones", "Panyabí", "French"};
+        final String[] letra = {"zh-TW", "de", "en", "hi", "ar", "pt", "bd", "ru", "ja", "pa", "fr",};
+        final String[] lugar = {"CHN", "DEU", "USA", "NPL", "SAU", "PRT", "BGD", "RUS", "JPN", "IND", "FRA",};
 
         //creamos el adapter del spinner y le asignamos los datos
-        spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, letra));
+        spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, nombre));
 
         //listener del spinner
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -100,8 +101,9 @@ public class EscucharHablarTraductor extends AppCompatActivity{
                 idioma=(String) adapterView.getItemAtPosition(pos);
 
                 //hacemos un for para settear el pais segund el idioma
-                for(int i=0;i<letra.length;i++){
-                    if(letra[i]==idioma){
+                for(int i=0;i<nombre.length;i++){
+                    if(nombre[i]==idioma){
+                        idioma=letra[i];
                         pais=lugar[i];
                     }
                 }

@@ -97,9 +97,10 @@
                 android:textSize="14dp" />
 
             <ListView
+                android:nestedScrollingEnabled="true"
                 android:id="@+id/ListaTareas2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="280dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
