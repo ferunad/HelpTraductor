@@ -25,8 +25,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -34,7 +32,6 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.auth.OAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class PantallaPrincipal extends AppCompatActivity implements View.OnClickListener {
@@ -64,8 +61,8 @@ public class PantallaPrincipal extends AppCompatActivity implements View.OnClick
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         TextoCorreo=findViewById(R.id.correo);
         TextoContrasena=findViewById(R.id.contrasena);
-        boton=findViewById(R.id.botonCrear);
-        boton=findViewById(R.id.botonCrear);
+        boton=findViewById(R.id.botonEnviar);
+        boton=findViewById(R.id.botonEnviar);
         botonRegistrar=findViewById(R.id.botonRegistrarse);
         facebook=findViewById(R.id.login_button);
 

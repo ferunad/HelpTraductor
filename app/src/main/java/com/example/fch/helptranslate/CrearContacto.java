@@ -2,13 +2,11 @@ package com.example.fch.helptranslate;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class CrearContacto extends AppCompatActivity {
 
@@ -26,7 +24,7 @@ public class CrearContacto extends AppCompatActivity {
         TextoNombre = findViewById(R.id.nombre);
         TextoCorreo = findViewById(R.id.correo);
         TextoCelular = findViewById(R.id.celular);
-        botonCrear =findViewById(R.id.botonCrear);
+        botonCrear =findViewById(R.id.botonEnviar);
         botonRegresar=findViewById(R.id.botonVolver);
 
         // listener para el boton encargado de comenzar el proceso de registrar los datos

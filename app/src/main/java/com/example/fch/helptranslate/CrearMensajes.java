@@ -23,7 +23,7 @@ public class CrearMensajes extends AppCompatActivity {
         //Conexion con el xml
         TextoTituloMensaje = findViewById(R.id.titulomensaje);
         TextoMensaje = findViewById(R.id.mensaje);
-        botonCrear =findViewById(R.id.botonCrear);
+        botonCrear =findViewById(R.id.botonEnviar);
         botonRegresar=findViewById(R.id.botonVolver);
 
         // listener para el boton encargado de comenzar el proceso de registrar los datos

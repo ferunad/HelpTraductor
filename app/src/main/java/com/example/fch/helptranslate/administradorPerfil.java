@@ -5,13 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,10 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 public class administradorPerfil extends AppCompatActivity {
 
@@ -54,7 +49,7 @@ public class administradorPerfil extends AppCompatActivity {
         TextoContrasena=findViewById(R.id.contrasena);
         TextoCelular=findViewById(R.id.celular);
         TextoNombre=findViewById(R.id.nombre);
-        boton=findViewById(R.id.botonCrear);
+        boton=findViewById(R.id.botonEnviar);
         botonRegresar=findViewById(R.id.botonVolver);
         botonCambiar=findViewById(R.id.botonCambiarContraseña);
         botonAceptar=findViewById(R.id.Aceptar);

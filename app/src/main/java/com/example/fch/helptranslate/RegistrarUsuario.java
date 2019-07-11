@@ -41,7 +41,7 @@ public class RegistrarUsuario extends AppCompatActivity {
         TextoContrasena=findViewById(R.id.contrasena);
         TextoCelular=findViewById(R.id.celular);
         TextoNombre=findViewById(R.id.nombre);
-        boton=findViewById(R.id.botonCrear);
+        boton=findViewById(R.id.botonEnviar);
         botonRegresar=findViewById(R.id.botonVolver);
 
         //Conexión con la base de datos

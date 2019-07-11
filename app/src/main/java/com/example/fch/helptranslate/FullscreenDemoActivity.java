@@ -22,6 +22,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Build;
@@ -45,12 +46,10 @@ public class FullscreenDemoActivity extends YouTubeFailureRecoveryActivity imple
   private static final int PORTRAIT_ORIENTATION = Build.VERSION.SDK_INT < 9
       ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
       : ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT;
-
   private LinearLayout baseLayout;
   private YouTubePlayerView playerView;
   private YouTubePlayer player;
   private Button fullscreenButton,compartir;
-
   private View otherViews;
   private Button botonRegresar;
 
@@ -67,18 +66,36 @@ public class FullscreenDemoActivity extends YouTubeFailureRecoveryActivity imple
     fullscreenButton = (Button) findViewById(R.id.fullscreen_button);
     otherViews = findViewById(R.id.other_views);
     botonRegresar=findViewById(R.id.botonVolver);
+    compartir=findViewById(R.id.botonCompartir);
+
+    doLayout();
 
     //listener del boton de pantalla completa
     fullscreenButton.setOnClickListener(this);
 
     playerView.initialize(ClaveParaConexion.DEVELOPER_KEY, this);
 
-    doLayout();
-
     botonRegresar.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         finish();
+      }
+    });
+
+    compartir.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+
+        final String Url=getIntent().getExtras().getString("Url");
+        Bundle nombreVideo=new Bundle();
+        String linkVideo="https://www.youtube.com/watch?v="+Url;
+        //ingresamos los datos en el bundle
+        nombreVideo.putString("url",linkVideo);
+        //cambiamos de activity y enviamos el bundle
+        Intent vista=new Intent(FullscreenDemoActivity.this,EnviarCorreo.class);
+        vista.putExtras(nombreVideo);
+        startActivity(vista);
+
       }
     });
   }
