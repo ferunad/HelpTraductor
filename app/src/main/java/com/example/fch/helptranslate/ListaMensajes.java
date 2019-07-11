@@ -150,26 +150,28 @@ public class ListaMensajes extends AppCompatActivity {
         });
     }
 
-
-
-
+    //metoodo para escuchar el mensaje elejido por el uusario
     public void escuchar(View view) {
-
         ConstraintLayout parentRow = (ConstraintLayout) view.getParent();
-
+        //encontramos el titulo de mensaje
         TextView vistaDelTitulo = (TextView) parentRow.findViewById(R.id.titulo);
 
+        //lo colocamos en una variables
         String titulo=vistaDelTitulo.getText().toString();
 
+        //buscamos el mensaje con ese titulo
         for(final Mensajes x:listadeMensajes){
             if(x.getTituloMensaje()==titulo){
                 myTTS = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
                     @Override
                     public void onInit(int status) {
                         if (status != TextToSpeech.ERROR) {
-                            // replace this Locale with whatever you want
+
+                            //colomas el idioma y lugar para que pueda hablar
                             Locale localeToUse = new Locale("es","COL");
                             myTTS.setLanguage(localeToUse);
+
+                            //iniciamos el metoodo de hablar
                             myTTS.speak(x.getMensajes(),TextToSpeech.QUEUE_FLUSH,null);
                         }
                     }

@@ -42,7 +42,7 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
 
-        //Listener para el boton que lleva a contactos
+
         botonContactos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +78,7 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
 
-        //Listener para el boton que lleva a apliaciones
+        //Listener para el boton que lleva a al traductor
         traductor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +86,8 @@ public class MenuPrincipal extends AppCompatActivity {
                 startActivity(aplicaciones);
             }
         });
+
+        //Listener para el boton que lleva a emergencia
         botonEmergencia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +96,7 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
 
+        //Listener y metodo para cerrar sesion
         cerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +105,7 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
 
+        //listener para el boton de lleva a perfil
         botonPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

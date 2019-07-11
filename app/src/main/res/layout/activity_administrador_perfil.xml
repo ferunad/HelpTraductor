@@ -107,6 +107,58 @@
                 android:fontFamily="@font/quicksandmedium"
                 android:text="Guardar"
                 android:textColor="#f7f8f8" />
+
+            <Button
+                android:id="@+id/botonCambiarContraseña"
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:autoText="false"
+                android:background="@drawable/boton_redondo_unico"
+                android:elevation="2dp"
+                android:fontFamily="@font/quicksandmedium"
+                android:text="Cambiar Contraseña"
+                android:textColor="#f7f8f8" />
+
+            <TextView
+                android:id="@+id/tituloCambio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/khularegular"
+                android:text="Ingresa la nueva constraseña:"
+                android:textAlignment="center"
+                android:textColor="@color/AzulApp"
+                android:textSize="14dp" />
+
+            <include
+                android:id="@+id/ingresarconstrasena2"
+                layout="@layout/campo_texto_contrasena_2"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"></include>
+
+            <Button
+                android:id="@+id/Aceptar"
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:autoText="false"
+                android:background="@drawable/boton_redondo_unico"
+                android:elevation="2dp"
+                android:fontFamily="@font/quicksandmedium"
+                android:text="Aceptar"
+                android:textColor="#f7f8f8" />
         </LinearLayout>
     </ScrollView>
 

@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,10 +45,12 @@ import com.google.cloud.translate.Translation;
 
 
 public class EscucharHablarTraductor extends AppCompatActivity{
+
+    //variables
     private TextToSpeech miVoz;
     private Translate translate;
     private String idioma,pais;
-    private Button botonTraducir,botonEspanol, b1,botonTutorial;
+    private Button botonTraducir,botonEspanol, botonGrabar,botonTutorial;
     private Spinner spinner;
     private ImageView  botonVolver;
     private EditText textoTraducir,textoTraducido;
@@ -63,13 +66,15 @@ public class EscucharHablarTraductor extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_escuchar_hablar_traductor);
+
+        //conexion con el xml
         botonTraducir= findViewById(R.id.emergencia);
         spinner = (Spinner) findViewById(R.id.spinnerIdiomas);
         textoTraducir =(EditText)findViewById(R.id.mensajeGrande);
         listaElementos =findViewById(R.id.ListaTareas2);
         botonEspanol= findViewById(R.id.espanol);
         botonTutorial= findViewById(R.id.botonTutorial);
-        b1 = (Button) findViewById(R.id.grabar);
+        botonGrabar = (Button) findViewById(R.id.grabar);
         botonVolver=findViewById(R.id.botonVolver);
         cargando=findViewById(R.id.cargando);
         nohayelementos=findViewById(R.id.nohayelementos);
@@ -79,38 +84,40 @@ public class EscucharHablarTraductor extends AppCompatActivity{
         nohayelementos.setVisibility(View.GONE);
         listaElementos.setClickable(true);
 
-
-
+        //lista con los idiomas
         final String[] letra = {"en","de","ru","pt","ja","hi","fr","zh-TW","ar"};
         final String[] lugar = {"USA","DEU","RUS","PRT","JPN","NPL","FRA","CHN","SAU"};
+
+        //creamos el adapter del spinner y le asignamos los datos
         spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, letra));
 
-        b1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onRecordBtnClickedStorge();
-            }
-        });
-
+        //listener del spinner
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
             {
-
+                //leemos la informacion de la eleccion
                 idioma=(String) adapterView.getItemAtPosition(pos);
+
+                //hacemos un for para settear el pais segund el idioma
                 for(int i=0;i<letra.length;i++){
                     if(letra[i]==idioma){
                         pais=lugar[i];
                     }
-
-
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent)
             {}
+        });
+
+        //listeners de los botones
+        botonGrabar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                verificarPermisos();
+            }
         });
         botonEspanol.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,12 +137,18 @@ public class EscucharHablarTraductor extends AppCompatActivity{
                 }
             }
         });
-
-        //boton de regresar que finaliza la activity para volver a la anterior
         botonVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        botonTutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getTranslateService();
+                traducir("Esta app HelpTranslator y todo lo que yo escribe lo traducirá en audio y cuando yo le acerque el teléfono a usted me debera hablar para que la app me traduzca a texto. Gracias.");
+
             }
         });
 
@@ -198,113 +211,25 @@ public class EscucharHablarTraductor extends AppCompatActivity{
                 //separamos los datos que nos interesan en variables aparte
                 String tituloMensaje=temporal.getTituloMensaje();
                 String mensaje=temporal.getMensajes();
+
+                //iniciamos el traductor
                 getTranslateService();
+
+                //llamamos al metodo de traducir
                 traducir(mensaje);
-
-            }
-        });
-        botonTutorial.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getTranslateService();
-                traducir("Esta app HelpTranslator y todo lo que yo escribe lo traducirá en audio y cuando yo le acerque el teléfono a usted me debera hablar para que la app me traduzca a texto. Gracias.");
-
-            }
-        });
-
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-            case 10: {
-                String texto="";
-                try {
-                ArrayList<String> resultado=data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                texto = traducirTextualmente(resultado.get(0).trim());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                textoTraducido.setText(texto);
-                break;
-            }
-
-        }
-    }
-
-
-    public void escucharMensaje(final String textoADecir){
-        //metedoo para escuchar los mensajes
-        miVoz = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status != TextToSpeech.ERROR) {
-                    // replace this Locale with whatever you want
-                    Locale localeToUse = new Locale(idioma,pais);
-                    miVoz.setLanguage(localeToUse);
-                    miVoz.speak(textoADecir,TextToSpeech.QUEUE_FLUSH,null);
-                }
             }
         });
     }
 
-    public void escucharMensajeEnEspañol(final String textoADecir){
-        // metodo creado para poder escuchar mesajes unicamente en español
-        miVoz = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status != TextToSpeech.ERROR) {
-                    // replace this Locale with whatever you want
-                    Locale localeToUse = new Locale("es","COL");
-                    miVoz.setLanguage(localeToUse);
-                    miVoz.speak(textoADecir,TextToSpeech.QUEUE_FLUSH,null);
-                }
-            }
-        });
-    }
-    public void  traducir(String mensaje){
-        // metodo para traducir
-        Translation translation = translate.translate(mensaje, TranslateOption.sourceLanguage("es"), TranslateOption.targetLanguage(idioma));
-        escucharMensaje(translation.getTranslatedText());
-    }
-
-    public String traducirTextualmente(String mensaje)throws Exception{
-        // Instantiates a client
-        // Translates some text into Russian
-        getTranslateService();
-        Translation translation = translate.translate(mensaje, TranslateOption.sourceLanguage("en"), TranslateOption.targetLanguage("es"));
-        String hola = translation.getTranslatedText();
-        return hola;
-    }
-
-    public void getTranslateService() {
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        try (InputStream is = getResources().openRawResource(R.raw.credentials)) {
-
-            //Get credentials:
-            final GoogleCredentials myCredentials = GoogleCredentials.fromStream(is);
-
-            //Set credentials and get translate service:
-            TranslateOptions translateOptions = TranslateOptions.newBuilder().setCredentials(myCredentials).build();
-
-            translate = translateOptions.getService();
-
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-
-        }
-    }
-
+    //metodo para llamar el reocnocimiento de voz de google
     public void grabar(){
-
         //metodo de reconocimiento de voz integrado con el de google
-
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+
+        //extraemos el lenguaje elejido por el usuario
         String language = idioma+"-"+pais;
+
+        //setteamos las preferencias de usuario
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, language);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, language);
@@ -312,21 +237,125 @@ public class EscucharHablarTraductor extends AppCompatActivity{
         intent.putExtra(RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE, language);
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, language);
         intent.putExtra(RecognizerIntent.EXTRA_RESULTS, language);
+
+        //iniciamos el resultado de la actividad
         startActivityForResult(intent, 10);
 
     }
-    public void onRecordBtnClickedStorge() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE },
-                    10);
+
+    //cuando la actividad de reconocer termine con exito elejimos lo que nos interese
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 10: {
+                String texto="";
+                try {
+
+                //Creamos un arrayList donde guardamos los resultados
+                ArrayList<String> resultado=data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
+                //seleccionamos el mas fiable
+                texto = traducirTextualmente(resultado.get(0).trim());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                //lo colocamos en el edit text
+                textoTraducido.setText(texto);
+                break;
+            }
+        }
+    }
+
+    //metodo para escuchar cualquier mensaje por tts
+    public void escucharMensaje(final String textoADecir){
+
+        //creamos un nuevo tts
+        miVoz = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    //extraemos la opcion del usuario y lo colocamos en el tts para que tradusca segun el idioma y la entonacion
+                    Locale localeToUse = new Locale(idioma,pais);
+                    miVoz.setLanguage(localeToUse);
+
+                    //iniciamos el metodo para hablar
+                    miVoz.speak(textoADecir,TextToSpeech.QUEUE_FLUSH,null);
+                }
+            }
+        });
+    }
+
+    //metodo para escuhcar cualquier mensaje pero en español
+    public void escucharMensajeEnEspañol(final String textoADecir){
+        miVoz = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+
+                    //extraemos la opcion del usuario y lo colocamos en el tts para que tradusca segun el idioma y la entonacion
+                    Locale localeToUse = new Locale("es","COL");
+                    miVoz.setLanguage(localeToUse);
+
+                    //iniciamos el metodo para hablar
+                    miVoz.speak(textoADecir,TextToSpeech.QUEUE_FLUSH,null);
+                }
+            }
+        });
+    }
+
+    // metodo para traducir
+    public void  traducir(String mensaje){
+
+        //usamos la api de traduccion de google
+        Translation translation = translate.translate(mensaje, TranslateOption.sourceLanguage("es"), TranslateOption.targetLanguage(idioma));
+
+        //iniciamos el metodo de escuchar
+        escucharMensaje(translation.getTranslatedText());
+    }
+
+
+    //traducimos el resultado del audio a texto
+    public String traducirTextualmente(String mensaje)throws Exception{
+
+        //inicialisamos el servicio de traduccion
+        getTranslateService();
+
+        //usamos la api de traduccion de google
+        Translation translation = translate.translate(mensaje, TranslateOption.sourceLanguage(idioma), TranslateOption.targetLanguage("es"));
+        String resultado = translation.getTranslatedText();
+        return resultado;
+    }
+
+    //metodo para definir las credeciale para usar la api de google de traductor
+    public void getTranslateService() {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        try (InputStream is = getResources().openRawResource(R.raw.credentials)) {
+
+            //Gobtener las credenciales
+            final GoogleCredentials myCredentials = GoogleCredentials.fromStream(is);
+
+            //ponemos las credeciale sen el tradcutor
+            TranslateOptions translateOptions = TranslateOptions.newBuilder().setCredentials(myCredentials).build();
+            translate = translateOptions.getService();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+
+    //meoto para verificar el permiso para leer el almacenamiento
+    public void verificarPermisos() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, 10);
         } else {
-            onRecordBtnClicked();
+            verificarAudioPermisos();
 
         }
     }
 
-    public void onRecordBtnClicked() {
+    //meoto para verificar el permiso para usar el microfono
+    public void verificarAudioPermisos() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.RECORD_AUDIO },
@@ -335,14 +364,18 @@ public class EscucharHablarTraductor extends AppCompatActivity{
             grabar();
         }
     }
-    @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+
+
+    //resultados de pedir los permisos
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                                      @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 10) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 grabar();
             }else{
-                //User denied Permission.
+                Toast.makeText(EscucharHablarTraductor.this, "Se necesita que se acepten los permisos para usar esta funcionalidad", Toast.LENGTH_SHORT).show();
             }
         }
     }

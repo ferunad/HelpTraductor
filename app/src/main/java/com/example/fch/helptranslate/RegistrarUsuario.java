@@ -111,6 +111,7 @@ public class RegistrarUsuario extends AppCompatActivity {
                                 //ejecutamos la otra funcion de registro para que tambien lo guarde en la base de datos
                                 registrarseCompleto();
 
+                                Toast.makeText(RegistrarUsuario.this, "Registro completo",Toast.LENGTH_SHORT).show();
                                 // redirigimos al menu principal y finalizamos la vista
                                 Intent ir=new Intent(RegistrarUsuario.this,MenuPrincipal.class);
                                 startActivity(ir);
@@ -118,6 +119,7 @@ public class RegistrarUsuario extends AppCompatActivity {
                             } else {
                                 // esto se ejecutara en caso de que haya un error o problema
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(RegistrarUsuario.this, "Usuario ya registrado",Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

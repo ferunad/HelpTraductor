@@ -58,6 +58,8 @@ public class ContactoDeEmergencia extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        //revisamos que la autorizacion a los permisos necesesarios este activada
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.ACCESS_FINE_LOCATION },
@@ -112,6 +114,7 @@ public class ContactoDeEmergencia extends AppCompatActivity {
             }
         }
         );
+
         botonEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,16 +133,22 @@ public class ContactoDeEmergencia extends AppCompatActivity {
         botonUbicación.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //iniciamos el location manager
                 locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+                //revisamos que efectivamente esten activos los permisos
                 if (ActivityCompat.checkSelfPermission(ContactoDeEmergencia.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(ContactoDeEmergencia.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
                 }
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2 * 20 * 1000, 10, locationListenerGPS);
-                if(latitudeGPS==0){
 
+                //traemos la localizacion
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2 * 20 * 1000, 10, locationListenerGPS);
+
+                //Debido a que se demora un momento en traer la ubicacion ponemos un anuncio para que lo sepa el usuario
+                if(latitudeGPS==0){
                     Toast.makeText(ContactoDeEmergencia.this, "Espere.. estamos buscado su ubicacion vuelva a oprimir el boton en 5 a 10 segundos", Toast.LENGTH_SHORT).show();
                 }else{
-
+                    //enviamos a la verificacion de permisos
                     verficarPermisos2();
                 }
 
@@ -163,12 +172,15 @@ public class ContactoDeEmergencia extends AppCompatActivity {
         });
     }
 
-
-
+    //metodo para extraer la informacion que nos intereza del gps
     private final LocationListener locationListenerGPS = new LocationListener() {
         public void onLocationChanged(Location location) {
+
+            //extraemos la posicion actual en latitud y longitud
             longitudeGPS = location.getLongitude();
             latitudeGPS = location.getLatitude();
+
+            //seteamos el lugar el el location
             posicionActual=location;
         }
 
@@ -188,71 +200,102 @@ public class ContactoDeEmergencia extends AppCompatActivity {
         }
     };
 
+    //metodo para enviar un mensaje
         public void enviarMensaje() {
+            //extraemos los datos necesarios
             String numero = celular.getText().toString();
             String mensajeEnviar = mensaje.getText().toString();
+
+            //iniciamos el manager de sms
             SmsManager sms = SmsManager.getDefault();
+
+            //le adjuntamos los datos y lo enviamos
             sms.sendTextMessage(numero, null, mensajeEnviar, null, null);
         }
 
-    public void verficarPermisos() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.SEND_SMS },
-                    10);
-        } else {
-            enviarMensaje();
-        }
-    }
 
+    // Verificacion de permismo para enviar sms en el caso de enviar el mensaje de emergencia
+        public void verficarPermisos() {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.SEND_SMS }, 10);
+            } else {
+                enviarMensaje();
+            }
+        }
+
+    // Verificacion de permismo para enviar sms en el caso de enviar la ubicacion
     public void verficarPermisos2() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.SEND_SMS },
-                    10);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.SEND_SMS }, 10);
         } else {
             enviarMensaje2();
         }
     }
+
+    //Metodo para enviar la ubicacion actual por un sms
     public void enviarMensaje2() {
+
+        //extremos los datos
         String numero = celular.getText().toString();
+
+
+        //iniciamos el sms manager
         SmsManager sms = SmsManager.getDefault();
+
+        //usamos nuestro metodo set location
         setLocation(posicionActual);
         String mensajeUbicacion=direccion.trim();
+
+        //adjuntamos los daatos en el mensaje
         sms.sendTextMessage(numero, null, mensajeUbicacion, null, null);
-        Toast.makeText(ContactoDeEmergencia.this, "Mensaje enviado"+latitudeGPS+" "+longitudeGPS +direccion, Toast.LENGTH_SHORT).show();
+
+        //hacemos un toask informadole al usuario la información
+        Toast.makeText(ContactoDeEmergencia.this, "Mensaje enviado" +direccion, Toast.LENGTH_SHORT).show();
     }
 
-    @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                                     @NonNull int[] grantResults) {
+    //metodo para saber si se acepto o denego el permiso
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 10) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
             }else{
+                Toast.makeText(ContactoDeEmergencia.this,"Se necesita que actives los permisos para que la apliacación pueda funcionar ",Toast.LENGTH_SHORT).show();
                 //User denied Permission.
             }
         }
     }
 
+
+    //metodo para saber la ubicacion en direccion
     public void setLocation(Location location) {
         //Obtener la direccion de la calle a partir de la latitud y la longitud
         if (location.getLatitude() != 0.0 && location.getLongitude() != 0.0) {
             try {
+
+                //iniciamos el geocoder
                 Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-                List<Address> list = geocoder.getFromLocation(
-                        location.getLatitude(), location.getLongitude(), 1);
+
+                //ingresamos los datos en una lista
+                List<Address> list = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                 if (!list.isEmpty()) {
+
+                    //obtenemos el mas fiable
                     Address DirCalle = list.get(0);
+
+                    //lo traducimos a un string
                     direccion="Mi direccion es: \n" + DirCalle.getAddressLine(0);
                 }
 
             } catch (IOException e) {
+                // en caso de error se mostrara este mensaje
                 e.printStackTrace();
             }
         }
     }
 
+    //metodo para traer la infromacion del la lista de contactos
     public void inizializarLista(){
 
         //revisamos de cual usuario debemos traer la información
@@ -307,6 +350,7 @@ public class ContactoDeEmergencia extends AppCompatActivity {
 
     }
 
+    //metodo para traer los datos inciales
     public void inicializarDatosIniciales(){
 
         //revisamos de cual usuario debemos traer la información
@@ -352,9 +396,15 @@ public class ContactoDeEmergencia extends AppCompatActivity {
 
     }
 
+    //este metodo es para guardar los datos nuevos del usario
     public void guardarDatosPrestablecidos(){
+        //iniciamos la classe que tiene los metodos
         ManejoDeMensajesEmergencia actualizar= new ManejoDeMensajesEmergencia(ContactoDeEmergencia.this);
+
+        //utilizamos el metodo de actualizar datos
         actualizar.registroMensajes(mensaje.getText().toString(),celular.getText().toString());
+
+        //se lo informamos al usuario
         Toast.makeText(ContactoDeEmergencia.this, "Datos Guardados", Toast.LENGTH_SHORT).show();
     }
 }

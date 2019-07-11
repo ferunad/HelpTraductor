@@ -23,10 +23,8 @@ import com.google.android.youtube.player.YouTubePlayer;
 import android.content.Intent;
 import android.widget.Toast;
 
-/**
- * An abstract activity which deals with recovering from errors which may occur during API
- * initialization, but can be corrected through user action.
- */
+//classe de la api de google para los casos de errore de su api
+
 public abstract class YouTubeFailureRecoveryActivity extends YouTubeBaseActivity implements
     YouTubePlayer.OnInitializedListener {
 
@@ -47,7 +45,7 @@ public abstract class YouTubeFailureRecoveryActivity extends YouTubeBaseActivity
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     if (requestCode == RECOVERY_DIALOG_REQUEST) {
       // Retry initialization if user performed a recovery action
-      getYouTubePlayerProvider().initialize(DeveloperKey.DEVELOPER_KEY, this);
+      getYouTubePlayerProvider().initialize(ClaveParaConexion.DEVELOPER_KEY, this);
     }
   }
 

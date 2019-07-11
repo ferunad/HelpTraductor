@@ -34,12 +34,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
-/**
- * Sample activity showing how to properly enable custom fullscreen behavior.
- * <p>
- * This is the preferred way of handling fullscreen because the default fullscreen implementation
- * will cause re-buffering of the video.
- */
+//actividad de la api de google para reproducir los videos en pantlala completa
+
+
 public class FullscreenDemoActivity extends YouTubeFailureRecoveryActivity implements
     View.OnClickListener,
     CompoundButton.OnCheckedChangeListener,
@@ -55,26 +52,26 @@ public class FullscreenDemoActivity extends YouTubeFailureRecoveryActivity imple
   private Button fullscreenButton,compartir;
 
   private View otherViews;
-  private ImageView botonRegresar;
+  private Button botonRegresar;
 
   private boolean fullscreen;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
     setContentView(R.layout.fullscreen_demo);
+
+    //conexion con el html
     baseLayout = (LinearLayout) findViewById(R.id.layout);
     playerView = (YouTubePlayerView) findViewById(R.id.player);
     fullscreenButton = (Button) findViewById(R.id.fullscreen_button);
     otherViews = findViewById(R.id.other_views);
     botonRegresar=findViewById(R.id.botonVolver);
 
-
-    // You can use your own button to switch to fullscreen too
+    //listener del boton de pantalla completa
     fullscreenButton.setOnClickListener(this);
 
-    playerView.initialize(DeveloperKey.DEVELOPER_KEY, this);
+    playerView.initialize(ClaveParaConexion.DEVELOPER_KEY, this);
 
     doLayout();
 

@@ -48,5 +48,6 @@ dependencies {
     annotationProcessor 'com.google.cloud:google-cloud-speech:1.0.0'
     annotationProcessor 'com.google.cloud:google-cloud-translate:1.79.0'
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
+    implementation 'com.google.cloud:google-cloud-vision:1.79.0'
 }
 apply plugin: 'com.google.gms.google-services'
