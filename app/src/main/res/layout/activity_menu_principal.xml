@@ -42,14 +42,14 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/Camara"
+        android:id="@+id/Historial"
         android:layout_width="100dp"
         android:layout_height="37dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/boton_redondo"
         android:fontFamily="@font/quicksandbold"
-        android:text="Camara"
+        android:text="Historial"
         android:textColor="@color/blancoApp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,6 +59,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <ScrollView
+        android:id="@+id/ScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="330dp"

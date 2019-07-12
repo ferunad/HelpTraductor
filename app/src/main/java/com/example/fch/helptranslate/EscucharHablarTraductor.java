@@ -223,6 +223,14 @@ public class EscucharHablarTraductor extends AppCompatActivity{
         });
     }
 
+    public void agregarAlhistorial(String de,String mensajeGuardar){
+    ManejoDeHistorial historial=new  ManejoDeHistorial(EscucharHablarTraductor.this);
+
+    //usarmos el metodo de registro de usurios creado anteriormente
+        historial.registroContacto( de,mensajeGuardar);
+
+}
+
     //metodo para llamar el reocnocimiento de voz de google
     public void grabar(){
         //metodo de reconocimiento de voz integrado con el de google
@@ -264,7 +272,6 @@ public class EscucharHablarTraductor extends AppCompatActivity{
 
                 //lo colocamos en el edit text
                 textoTraducido.setText(texto);
-                break;
             }
         }
     }
@@ -283,6 +290,7 @@ public class EscucharHablarTraductor extends AppCompatActivity{
 
                     //iniciamos el metodo para hablar
                     miVoz.speak(textoADecir,TextToSpeech.QUEUE_FLUSH,null);
+
                 }
             }
         });
@@ -301,6 +309,7 @@ public class EscucharHablarTraductor extends AppCompatActivity{
 
                     //iniciamos el metodo para hablar
                     miVoz.speak(textoADecir,TextToSpeech.QUEUE_FLUSH,null);
+                    agregarAlhistorial("Tu: ",textoADecir);
                 }
             }
         });
@@ -314,6 +323,7 @@ public class EscucharHablarTraductor extends AppCompatActivity{
 
         //iniciamos el metodo de escuchar
         escucharMensaje(translation.getTranslatedText());
+        agregarAlhistorial("Tu: "+mensaje+" = ",translation.getTranslatedText());
     }
 
 
@@ -326,6 +336,7 @@ public class EscucharHablarTraductor extends AppCompatActivity{
         //usamos la api de traduccion de google
         Translation translation = translate.translate(mensaje, TranslateOption.sourceLanguage(idioma), TranslateOption.targetLanguage("es"));
         String resultado = translation.getTranslatedText();
+        agregarAlhistorial("Receptor: "+mensaje+" = ",translation.getTranslatedText());
         return resultado;
     }
 

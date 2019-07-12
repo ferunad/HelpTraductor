@@ -1,17 +1,22 @@
 package com.example.fch.helptranslate;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -21,6 +26,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.google.auth.oauth2.ComputeEngineCredentials;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.storage.Bucket;
+
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
+import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.vision.v1.AnnotateImageRequest;
 import com.google.cloud.vision.v1.AnnotateImageResponse;
 import com.google.cloud.vision.v1.BatchAnnotateImagesResponse;
@@ -33,8 +46,9 @@ import com.google.cloud.vision.v1.Paragraph;
 import com.google.cloud.vision.v1.Symbol;
 import com.google.cloud.vision.v1.TextAnnotation;
 import com.google.cloud.vision.v1.Word;
+import com.google.common.collect.Lists;
 import com.google.protobuf.ByteString;
-import com.google.zxing.aztec.detector.Detector;
+
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -47,9 +61,10 @@ import java.util.List;
 public class ReconocerTextoCamara extends AppCompatActivity {
 
     public static final int SELECT_FILE=10;
+    private static String guardar;
     private String Mostrar;
-    private String guardar;
-    private TextView textoTraido;
+
+    private static TextView textoTraido;
     private Button button;
 
     @Override
@@ -60,61 +75,86 @@ public class ReconocerTextoCamara extends AppCompatActivity {
         button=findViewById(R.id.button2);
 
 
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Choose Picture"), 1);
-
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, SELECT_FILE);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                    verificarPermisos();
 
-
-
-
-                try {
-                    detectDocumentText(Mostrar,System.out);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
             }
         });
-        textoTraido.setText(guardar);
+
 
 
     }
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Toast.makeText(ReconocerTextoCamara.this,"llegaste hasta aqui?",Toast.LENGTH_SHORT).show();
 
         Uri selectedImage;
         switch (requestCode) {
             case SELECT_FILE:
                 if (resultCode == RESULT_OK) {
                     selectedImage = data.getData();
-
                     String[] filePathColumn = { MediaStore.Images.Media.DATA };
-                    Toast.makeText(ReconocerTextoCamara.this,"llegaste hasta aqui?",Toast.LENGTH_SHORT).show();
-
                     Cursor cursor = getContentResolver().query(selectedImage,
                             filePathColumn, null, null, null);
                     cursor.moveToFirst();
-
                     int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                     Mostrar = cursor.getString(columnIndex);
                     Toast.makeText(ReconocerTextoCamara.this,Mostrar,Toast.LENGTH_SHORT).show();
                 }else if(resultCode==RESULT_CANCELED)
                 {
-                    Toast.makeText(ReconocerTextoCamara.this,"puto ERRROR DE  MIERDA?",Toast.LENGTH_SHORT).show();
+
                 }
                 break;
         }
     }
 
-    public static void detectDocumentText(String filePath, PrintStream out) throws Exception,
+    public void verificarPermisos() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.READ_EXTERNAL_STORAGE }, 10);
+        } else {
+            try {
+                authExplicit();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 10) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+            }else{
+                Toast.makeText(ReconocerTextoCamara.this, "Se necesita que se acepten los permisos para usar esta funcionalidad", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+
+    public void authExplicit() throws IOException {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        try (InputStream is = getResources().openRawResource(R.raw.computecredentials)) {
+            GoogleCredentials credentials = GoogleCredentials.fromStream(is).createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"));
+            Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
+            detectDocumentText(Mostrar,System.out);
+        }catch(IOException ioe) {
+            ioe.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void detectDocumentText(String filePath, PrintStream out) throws Exception,
             IOException {
         List<AnnotateImageRequest> requests = new ArrayList<>();
         ByteString imgBytes = ByteString.readFrom(new FileInputStream(filePath));
@@ -162,7 +202,8 @@ public class ReconocerTextoCamara extends AppCompatActivity {
                     }
                 }
                 out.println("\nComplete annotation:");
-                out.println(annotation.getText());
+                guardar=(annotation.getText());
+                textoTraido.setText(guardar);
             }
         }
     }

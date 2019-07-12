@@ -14,7 +14,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
     //variables
     private ImageView botonVideos,botonApps,botonDicionarios,botonContactos,botonMensajes;
-    private Button botonEmergencia,cerrarSesion,botonPerfil,camara;
+    private Button botonEmergencia,cerrarSesion,botonPerfil,camara,historial;
     private Button traductor;
 
     @Override
@@ -32,7 +32,8 @@ public class MenuPrincipal extends AppCompatActivity {
         botonEmergencia=findViewById(R.id.emergencia);
         cerrarSesion=findViewById(R.id.CerrarSesion);
         botonPerfil=findViewById(R.id.perfil);
-        camara=findViewById(R.id.Camara);
+        historial=findViewById(R.id.Historial);
+
 
         //Listener para el boton que lleva a mensajes
         botonMensajes.setOnClickListener(new View.OnClickListener() {
@@ -115,11 +116,12 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
 
-        camara.setOnClickListener(new View.OnClickListener() {
+
+        historial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Camara= new Intent(MenuPrincipal.this,ReconocerTextoCamara.class);
-                startActivity(Camara);
+                Intent Historial= new Intent(MenuPrincipal.this,HistorialTraducciones.class);
+                startActivity(Historial);
             }
         });
     }
