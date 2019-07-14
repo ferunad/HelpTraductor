@@ -13,7 +13,7 @@ public class AdaptadorDiccionarios extends BaseAdapter   {
     //Variables
     private Context context;
     private ArrayList<listados> listItems;
-
+//Prueba comentario
     // Getters, setter y constructor
     public AdaptadorDiccionarios(Context context, ArrayList<listados> listItems) {
         this.context = context;
